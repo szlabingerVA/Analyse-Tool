@@ -53,10 +53,6 @@ with col4:
 
 files = st.file_uploader("Upload", accept_multiple_files=True, type=["xlsm"])
 
-names=[]
-for i in files:
-    names.append(i.name)
-
 file=st.selectbox("Analyse-Files", files, format_func=lambda x: x.name)
 
 df = pd.read_excel(file,
