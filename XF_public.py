@@ -75,13 +75,13 @@ for path in files:
     sheet_name="Komponenten")
     parts.append(part)
 
-option=st.selectbox("Analyse-Files", names)
+option=st.selectbox("Analyse-Files", files)
 result=[]
-#result=list(pfad.rglob(option))
+result=list(files)
 
 resultpath=[]
 for i in result:
-    resultpath.append(i.name)
+        resultpath.append(i.name)
 
 
 df = pd.read_excel(
