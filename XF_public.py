@@ -64,8 +64,6 @@ df['Effizienz'] = df['Effizienz'].map('{:,.1f}%'.format)
 
 df.iloc[0] = ['-','-','-','-','-','-','-','-','-','-','-','-',"0","0",'-','-']
 
-col11, col21 = st.columns(2)
-
 fig_area = px.bar(
     data_frame=df, y="Effizienz", x="Komponentennummer",
     labels=dict(Komponentennummer="", Effizienz="Bauteileffizienz"), 
@@ -91,8 +89,10 @@ fig_area.update_layout(
 )
 fig_area['layout']['yaxis'].update(autorange = True)
 
-fig_area.update_traces(marker=dict(line=dict(width=0)),
-                       
+fig_area.update_traces(marker=dict(line=dict(width=0)))
+
+col11, col21 = st.columns(2)
+
 with col21:
     st.plotly_chart(fig_area)
 
