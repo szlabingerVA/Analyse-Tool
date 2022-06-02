@@ -68,13 +68,13 @@ result=[]
 result=list(INPUT.rglob(option))
 
 resultpath=[]
-for i in result:
-    resultpath.append(i.name)
+for j in result:
+    resultpath.append(j.name)
 
 #st.text_area(str(resultpath))
 
 df = pd.read_excel(
-    io=i,
+    io=j,
     engine="openpyxl",
     sheet_name="Komponenten"
     )
