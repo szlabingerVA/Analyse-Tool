@@ -60,7 +60,9 @@ files=[]
 with col21:
     file = st.file_uploader("Upload", accept_multiple_files=False, type=["csv"])
 
-df = pd.read_csv(file)
+df = pd.read_excel(file,
+                   engine="openpyxl",
+                  sheet_name="Komponenten")
 
 df["Effizienz"] = df["Effizienz"]*100
 df['Effizienz'] = df['Effizienz'].map('{:,.1f}%'.format)
