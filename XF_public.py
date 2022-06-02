@@ -57,7 +57,7 @@ names=[]
 for i in files:
     names.append(i.name)
 
-file=st.selectbox("Analyse-Files", files, format_func=lambda x: str(x).split(')[1])
+file=st.selectbox("Analyse-Files", files, format_func=lambda x: str(x).split('))
 
 df = pd.read_excel(file,
                    engine="openpyxl",
