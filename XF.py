@@ -64,6 +64,8 @@ for path in files:
     sheet_name="Komponenten")
     parts.append(part)
 
+st.write(str(files))
+        
 option=st.selectbox("Analyse-Files", names)
 result=[]
 result=list(INPUT.rglob(option))
