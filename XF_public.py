@@ -58,7 +58,11 @@ with col4:
 
 files = st.file_uploader("Upload", accept_multiple_files=True, type=["xlsm"])
 
-file=st.selectbox("Analyse-Files", files)
+names=[]
+for i in files:
+    names.append(i.name)
+
+file=st.selectbox("Analyse-Files", files, format_func=lambda x: names.get(x))
 
 df = pd.read_excel(file,
                    engine="openpyxl",
