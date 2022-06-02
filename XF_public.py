@@ -55,6 +55,8 @@ files = st.file_uploader("Upload", accept_multiple_files=True, type=["xlsm"])
 
 file=st.selectbox("Analyse-Files", files, format_func=lambda x: x.name)
 
+If file is not None:
+
 df = pd.read_excel(file,
                    engine="openpyxl",
                   sheet_name="Komponenten")
