@@ -76,11 +76,11 @@ fig_area = px.bar(
     #color="Abfrage",
     #color_continuous_scale=px.colors.sequential.Oryel
     #color_discrete_sequence=px.colors.sequential.Plasma_r
-    color_discrete_sequence =['#0082B4']*len(df)
+    color_discrete_sequence =['#0082B4']*len(df),
+    marker_color=None
 )
 
 fig_area.update_layout(
-    marker_color=None,
     plot_bgcolor="rgba(256,256,256,0)",
     title_font_family="voestalpine",
     font_family="voestalpine",
