@@ -60,11 +60,8 @@ files=[]
 with col21:
     file = st.file_uploader("Upload", accept_multiple_files=False, type=["xlsm", "xlsx", "xls"])
 
-if file is not None:
-    file_details = {"FileName":file.name,"FileType":file.type,"FileSize":file.size}
-
 df = pd.read_excel(
-    io=file,
+    file,
     engine="openpyxl",
     sheet_name="Komponenten"
     )
