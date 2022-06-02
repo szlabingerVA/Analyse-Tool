@@ -27,11 +27,6 @@ st.markdown(
         unsafe_allow_html=True,
     )
 
-#names = files.split("/")
-#names = [i.split("/")[0] for i in files]
-#names = [val[-1] for val in str(files).split("/")]
-
-#voest=Image.open("U:/WORK/Logos und Vorlagen/voestalpine_LOGO.jpg")
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
@@ -62,7 +57,7 @@ names=[]
 for i in files:
     names.append(i.name)
 
-file=st.selectbox("Analyse-Files", files)
+file=st.selectbox("Analyse-Files", files, format_func=lambda x: "option " + str(x))
 
 df = pd.read_excel(file,
                    engine="openpyxl",
