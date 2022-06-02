@@ -75,7 +75,8 @@ for path in files:
     sheet_name="Komponenten")
     parts.append(part)
 
-option=st.selectbox("Analyse-Files", files)
+option=st.selectbox("Analyse-Files", names)
+st.write(option)
 result=[]
 result=list(files)
 
