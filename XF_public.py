@@ -56,8 +56,11 @@ with col3:
 with col4:
     st.write("")
 
-file = st.file_uploader("Upload", accept_multiple_files=False, type=["xlsm"])
+files = st.file_uploader("Upload", accept_multiple_files=True, type=["xlsm"])
 
+file=st.selectbox("Analyse-Files", files)
+
+If file is not None:
 df = pd.read_excel(file,
                    engine="openpyxl",
                   sheet_name="Komponenten")
