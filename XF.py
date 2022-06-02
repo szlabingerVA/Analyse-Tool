@@ -40,7 +40,7 @@ files = list(INPUT.rglob("*Analyse.xls*"))
 #names = [i.split("/")[0] for i in files]
 #names = [val[-1] for val in str(files).split("/")]
 
-voest=Image.open("U:/WORK/Logos und Vorlagen/voestalpine_LOGO.jpg")
+#voest=Image.open("U:/WORK/Logos und Vorlagen/voestalpine_LOGO.jpg")
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
@@ -62,7 +62,7 @@ with col3:
     st.write("")
 
 with col4:
-    st.image(voest, width=400)
+    st.image("")
 
 names=[]
 for i in files:
