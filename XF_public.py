@@ -58,7 +58,7 @@ with col4:
 col21, col22 = st.columns(2)
 files=[]
 with col21:
-    file = st.file_uploader("Upload", accept_multiple_files=False, type=["csv"])
+    file = st.file_uploader("Upload", accept_multiple_files=False, type=["xlsm"])
 
 df = pd.read_excel(file,
                    engine="openpyxl",
