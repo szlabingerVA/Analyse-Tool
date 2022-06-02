@@ -64,7 +64,7 @@ if file is not None:
     file_details = {"FileName":file.name,"FileType":file.type,"FileSize":file.size}
 
 df = pd.read_excel(
-    io=datafile,
+    io=file,
     engine="openpyxl",
     sheet_name="Komponenten"
     )
