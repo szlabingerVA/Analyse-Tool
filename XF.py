@@ -73,8 +73,10 @@ for j in result:
 
 #st.text_area(str(resultpath))
 
+fpath = os.path.dirname(j)
+
 df = pd.read_excel(
-    io="V:/02_DLDS_Operational_Workplace/04_Engineering/Variantenanalyse/IE2010/#Prozessdatei/IE2010_Analyse.xlsm",
+    io=fpath,
     engine="openpyxl",
     sheet_name="Komponenten"
     )
