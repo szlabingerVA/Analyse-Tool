@@ -34,7 +34,9 @@ st.markdown(
         unsafe_allow_html=True,
     )
 
-INPUT = Path('V:/02_DLDS_Operational_Workplace/04_Engineering/Variantenanalyse/')
+#'V:/02_DLDS_Operational_Workplace/04_Engineering/Variantenanalyse/'
+#os.path.dirname
+INPUT = Path(os.path.dirname('V:/02_DLDS_Operational_Workplace/04_Engineering/Variantenanalyse/'))
 files = list(INPUT.rglob("*Analyse.xls*"))
 
 #names = files.split("/")
