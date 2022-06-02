@@ -91,8 +91,8 @@ fig_area.update_layout(
 )
 fig_area['layout']['yaxis'].update(autorange = True)
 
-fig_area.update_traces(line_color=None)
-
+fig_area.update_traces(marker=dict(line=dict(width=0))
+                       
 with col21:
     st.plotly_chart(fig_area)
 
