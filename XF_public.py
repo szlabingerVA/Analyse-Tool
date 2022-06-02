@@ -80,6 +80,7 @@ fig_area = px.bar(
 )
 
 fig_area.update_layout(
+    marker_color=None,
     plot_bgcolor="rgba(256,256,256,0)",
     title_font_family="voestalpine",
     font_family="voestalpine",
