@@ -41,28 +41,16 @@ files = list(INPUT.rglob("*Analyse.xls*"))
 #names = [val[-1] for val in str(files).split("/")]
 
 #voest=Image.open("U:/WORK/Logos und Vorlagen/voestalpine_LOGO.jpg")
-col1, col2, col3, col4 = st.columns(4)
 
-with col1:
-    #st.title(":bar_chart: Effizienz-Analyse")
-    st.markdown("""
+#st.title(":bar_chart: Effizienz-Analyse")
+st.markdown("""
         <style>
         .big-font {
          font-size:50px !important;
         }
         </style>
         """, unsafe_allow_html=True)
-
-    st.markdown('<p class="big-font">Effizienz-Analyse</p>', unsafe_allow_html=True)
-
-with col2:
-    st.write("")
-
-with col3:
-    st.write("")
-
-with col4:
-    st.image("")
+st.markdown('<p class="big-font">Effizienz-Analyse</p>', unsafe_allow_html=True)
 
 names=[]
 for i in files:
