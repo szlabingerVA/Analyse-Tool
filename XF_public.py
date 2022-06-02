@@ -76,7 +76,6 @@ for path in files:
     parts.append(part)
 
 option=st.selectbox("Analyse-Files", names)
-st.write(option)
 result=[]
 result=list(files)
 
@@ -86,7 +85,7 @@ for i in result:
 
 
 df = pd.read_excel(
-    io=i,
+    io=option,
     engine="openpyxl",
     sheet_name="Komponenten"
     )
