@@ -89,7 +89,7 @@ fig_area = px.bar(
 )
 
 fig_area.update_layout(
-    plot_bgcolor="rgba(256,256,256,1)",
+    plot_bgcolor="rgba(256,256,256,0)",
     title_font_family="voestalpine",
     font_family="voestalpine",
     xaxis=(dict(showgrid=False,
