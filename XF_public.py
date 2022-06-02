@@ -58,34 +58,13 @@ with col4:
 col21, col22 = st.columns(2)
 files=[]
 with col21:
-    files = st.file_uploader("Upload", accept_multiple_files=True, type=["xlsm", "xlsx", "xls"])
+    file = st.file_uploader("Upload", accept_multiple_files=False, type=["xlsm", "xlsx", "xls"])
 
-#test
-#with col22:
-    #pfad=Path(st.text_input("Dateienpfad"))
-
-names=[]
-for i in files:
-    names.append(i.name)
-
-parts=[]
-for path in files:
-    part = pd.read_excel(path, 
-    engine="openpyxl",
-    sheet_name="Komponenten")
-    parts.append(part)
-
-option=st.selectbox("Analyse-Files", names)
-result=[]
-result=list(files)
-
-resultpath=[]
-for i in result:
-        resultpath.append(i.name)
-
+if file is not None:
+    file_details = {"FileName":file.name,"FileType":file.type,"FileSize":file.size}
 
 df = pd.read_excel(
-    io=option,
+    io=datafile,
     engine="openpyxl",
     sheet_name="Komponenten"
     )
