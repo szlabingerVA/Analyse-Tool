@@ -43,7 +43,7 @@ selected_hor=option_menu(
     }
 )
 with st.sidebar:
-    selected_hor=option_menu(
+    selected_side=option_menu(
         menu_title="Filter",
         options=("Materialgruppe","Effizienz","Objektsparte"),
         icons=("caret-right-fill", "caret-right-fill", "caret-right-fill"),
