@@ -27,35 +27,6 @@ st.markdown(
         unsafe_allow_html=True,
     )
 
-selected_hor=option_menu(
-    menu_title=None,
-    options=("Analyse","Upload","Overview"),
-    icons=("bar-chart-fill", "cloud-arrow-up", "bezier"),
-    default_index=0,
-    menu_icon="cast",
-    orientation="horizontal",
-    styles={
-        "container": {"padding": "0!important", "background-color": "#262730"},
-        "icon": {"color": "#FAFAFA"}, 
-        "nav-link": {"font_family": "voestalpine", "text-align": "center", "--hover-color": "#A5A5A5"},
-        "nav-link-selected": {"background-color": "#0082B4"},
-    }
-)
-with st.sidebar:
-    selected_hor=option_menu(
-        menu_title="Filter",
-        options=("Materialgruppe","Effizienz","Objektsparte"),
-        icons=("caret-right-fill", "caret-right-fill", "caret-right-fill"),
-        default_index=0,
-        menu_icon="cast",
-        styles={
-            "container": {"padding": "0!important", "background-color": "#262730"},
-            "icon": {"color": "#FAFAFA"}, 
-            "nav-link": {"font_family": "voestalpine", "text-align": "left", "--hover-color": "#A5A5A5"},
-            "nav-link-selected": {"background-color": "#0082B4"},
-        }
-    )
-
 col1, col2 = st.columns((3,1))
 
 with col1:
