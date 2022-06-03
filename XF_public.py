@@ -6,8 +6,10 @@ from pathlib import Path
 from PIL import Image
 
 st.set_page_config(page_title="Analyse Dashboard", page_icon=":bar_chart:", layout="centered")
-#st.title(":bar_chart: Effizienz-Analyse")
-#st.markdown("##")
+
+col01, col02, col03 = st.columns((1,6,1))
+with col02:
+    st.image('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Voestalpine_2017_logo.svg/1200px-Voestalpine_2017_logo.svg.png')
 
 st.markdown(
         """
