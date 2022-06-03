@@ -117,14 +117,10 @@ if file is not None:
     fig_area['layout']['yaxis'].update(autorange = True)
 
     fig_area.update_traces(marker=dict(line=dict(width=0)))
-
-    col11, col12, col13 = st.columns([1,6,1])
-
-    #with col12:
+        
     st.plotly_chart(fig_area, use_container_width=True)
 
     df = df.iloc[1: , :]
 
-    with col12:
-        st.write(df.loc[:, ["Komponentennummer", "Effizienz", "Materialart", "Objektsparte"]], height=400)
+    st.write(df.loc[:, ["Komponentennummer", "Effizienz", "Materialart", "Objektsparte"]], height=400)
 
