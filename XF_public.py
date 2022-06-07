@@ -107,13 +107,13 @@ if selected_hor == "ABC-Analyse":
         fig_bar1 = px.bar(df, y=4,
             barmode = 'stack', orientation="v", color=5,
             labels={"count":"Mengenanteil", "4":""},
-            hover_name=0, hover_data=[],
+            hover_data=[],
             color_discrete_sequence=px.colors.qualitative.VoestBlue)
         
         fig_bar2 = px.bar(df, y=5,
             barmode = 'stack', orientation="v", color=5,
             labels={"count":"Wertanteil", "5":""},
-            hover_name=0, hover_data=[],
+            hover_data=[],
             color_discrete_sequence=px.colors.qualitative.VoestBlue)
 
         fig_bar1.update_layout(
