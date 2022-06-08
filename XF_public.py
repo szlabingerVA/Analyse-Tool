@@ -267,7 +267,7 @@ if selected_hor == "ABC-Analyse":
         col21, col22, col23 = st.columns((1,6,1))
 
         with col22:
-            st.dataframe(dfr, height=400)
+            st.dataframe(dfr, height=400, width=600)
 
 if selected_hor == "Effizienz-Analyse":
 
