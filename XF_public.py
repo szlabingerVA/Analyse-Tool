@@ -313,8 +313,8 @@ if selected_hor == "Effizienz-Analyse":
                         sheet_name=sheet,
                         na_filter=False)
 
-        var=len(dfd.index)-1
-        ein=len(df.index)-1
+        var=len(dfd.index)
+        ein=len(df.index)
         unicount=0
         exklcount=0
 
@@ -323,7 +323,7 @@ if selected_hor == "Effizienz-Analyse":
                 unicount=unicount+1
 
         for i in range(len(df.index)):
-            if df.at[i,"Effizienz"] == 1/var:
+            if df.at[i,"Abfrage"] == 1:
                 exklcount=exklcount+1
 
         uni=unicount
