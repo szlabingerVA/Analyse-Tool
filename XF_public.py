@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+import os
 from streamlit_option_menu import option_menu
 from pathlib import Path
 
@@ -133,6 +134,8 @@ if selected_hor == "Overview":
             )
         
         st.plotly_chart(fig, use_container_width=True, height=800)
+        
+        os.system('start excel.exe Analyse_Kombi.xlsm')
 
 if selected_hor == "ABC-Analyse":
     
