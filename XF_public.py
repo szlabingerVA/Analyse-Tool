@@ -252,6 +252,7 @@ if selected_hor == "ABC-Analyse":
         with col12:
             st.write("")
             st.write("")
+            st.write("")
             st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">Klasse C</p>', unsafe_allow_html=True)
             st.write(df.at[2,4]+" :arrow_right: "+df.at[2,5])
             st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">Klasse B</p>', unsafe_allow_html=True)
