@@ -135,7 +135,8 @@ if selected_hor == "Overview":
         
         st.plotly_chart(fig, use_container_width=True, height=800)
         
-        os.system('start excel.exe Analyse_Kombi.xlsm')
+        if st.button("test"):
+            os.system('start excel.exe Analyse_Kombi.xlsm')
 
 if selected_hor == "ABC-Analyse":
     
