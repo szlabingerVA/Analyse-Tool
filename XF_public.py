@@ -195,7 +195,7 @@ if selected_hor == "Overview":
         
         MW=[]
         for i in dfsP:
-            MW.append((dfsP[i].at[1,"Mittelwert"]))
+            MW.append(sum(dfsP[i]["Effizienz"])/len(dfsP[i].index))
         
         MWN=[]
         for file in files:
