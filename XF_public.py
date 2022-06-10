@@ -255,6 +255,7 @@ if selected_hor == "Overview":
                         row=2, col=1)        
         fig.update_traces(showlegend=False,
                         hoverinfo="name",
+                        hoverlabel_namelength=-1,
                         row=2, col=1)
 
 
