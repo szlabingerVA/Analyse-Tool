@@ -184,7 +184,7 @@ if selected_hor == "Overview":
         for file in files:
             dfsP[f"{file.name}"]=pd.read_excel(file,
                             engine="openpyxl",
-                            sheet_name="Komponenten",
+                            sheet_name=sheet,
                             na_filter=False)
 
         SumGEN=SumFERT+SumHIBE+SumNORM
