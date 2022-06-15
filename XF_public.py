@@ -74,228 +74,232 @@ if selected_hor == "Overview":
     #file=st.selectbox("Analyse-File Auswahl", files, format_func=lambda x: x.name)
 
     if filesInput is not None:
-
-        with st.sidebar:
-                st.image('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Voestalpine_2017_logo.svg/1200px-Voestalpine_2017_logo.svg.png')
-                selected_side=option_menu(
-                menu_title="Materialgruppe",
-                options=("Allgemein","Fertigungsteile","Zukaufteile","Normteile"),
-                icons=("caret-right-fill", "caret-right-fill", "caret-right-fill", "caret-right-fill"),
-                default_index=0,
-                menu_icon="cast",
-                styles={
-                "container": {"padding": "0!important", "background-color": "#262730"},
-                "icon": {"color": "#FAFAFA"}, 
-                "nav-link": {"font_family": "voestalpine", "text-align": "left", "--hover-color": "#A5A5A5"},
-                "nav-link-selected": {"background-color": "#0082B4"},
-                }
-                )
-                
-                if selected_side == "Fertigungsteile":
-                    sheet="Komponenten_FERT"
-                if selected_side == "Zukaufteile":
-                    sheet="Komponenten_HIBE"
-                if selected_side == "Normteile":
-                    sheet="Komponenten_NORM"
-                if selected_side == "Allgemein":
-                    sheet="Komponenten"
-                
-                files=st.multiselect("Baugruppen-Auswahl", filesInput, default=filesInput, format_func=lambda x: x.name.split("_")[0])
-
-        dfs={}
-        for file in files:
-            dfs[f"{file.name}"]=pd.read_excel(file,
-                            engine="openpyxl",
-                            sheet_name=sheet,
-                            na_filter=False)
-
-        fill=[]
-        for file in files:
-            for i in range(len(dfs[file.name].index)):
-                fill.append(i/(len(dfs[file.name].index)))
-            dfs[file.name]["Prozent"]=fill
-            fill.clear()
         
-        unipL=[]
-        exklpL=[]
+        try:
+            with st.sidebar:
+                    st.image('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Voestalpine_2017_logo.svg/1200px-Voestalpine_2017_logo.svg.png')
+                    selected_side=option_menu(
+                    menu_title="Materialgruppe",
+                    options=("Allgemein","Fertigungsteile","Zukaufteile","Normteile"),
+                    icons=("caret-right-fill", "caret-right-fill", "caret-right-fill", "caret-right-fill"),
+                    default_index=0,
+                    menu_icon="cast",
+                    styles={
+                    "container": {"padding": "0!important", "background-color": "#262730"},
+                    "icon": {"color": "#FAFAFA"}, 
+                    "nav-link": {"font_family": "voestalpine", "text-align": "left", "--hover-color": "#A5A5A5"},
+                    "nav-link-selected": {"background-color": "#0082B4"},
+                    }
+                    )
 
-        for file in files:
-            ein=len(dfs[file.name].index)
-            unicount=0
-            exklcount=0
+                    if selected_side == "Fertigungsteile":
+                        sheet="Komponenten_FERT"
+                    if selected_side == "Zukaufteile":
+                        sheet="Komponenten_HIBE"
+                    if selected_side == "Normteile":
+                        sheet="Komponenten_NORM"
+                    if selected_side == "Allgemein":
+                        sheet="Komponenten"
 
-            for i in range(ein):
-                if dfs[file.name].at[i,"Effizienz"] == 1:
-                    unicount=unicount+1
+                    files=st.multiselect("Baugruppen-Auswahl", filesInput, default=filesInput, format_func=lambda x: x.name.split("_")[0])
 
-            unip=unicount/ein
-            unipL.append(unip)
+            dfs={}
+            for file in files:
+                dfs[f"{file.name}"]=pd.read_excel(file,
+                                engine="openpyxl",
+                                sheet_name=sheet,
+                                na_filter=False)
+
+            fill=[]
+            for file in files:
+                for i in range(len(dfs[file.name].index)):
+                    fill.append(i/(len(dfs[file.name].index)))
+                dfs[file.name]["Prozent"]=fill
+                fill.clear()
+
+            unipL=[]
+            exklpL=[]
+
+            for file in files:
+                ein=len(dfs[file.name].index)
+                unicount=0
+                exklcount=0
+
+                for i in range(ein):
+                    if dfs[file.name].at[i,"Effizienz"] == 1:
+                        unicount=unicount+1
+
+                unip=unicount/ein
+                unipL.append(unip)
+
+                for i in range(ein):
+                    if dfs[file.name].at[i,"Abfrage"] == 1:
+                        exklcount=exklcount+1
+
+                exklp=exklcount/ein
+                exklpL.append(exklp)
+
+            SumUni=sum(unipL)
+            avUni=(SumUni/len(unipL))*100        
+            SumExkl=sum(exklpL)
+            avExkl=(SumExkl/len(exklpL))*100
+
+            dfsPF={}
+            for file in files:
+                dfsPF[f"{file.name}"]=pd.read_excel(file,
+                                engine="openpyxl",
+                                sheet_name="Komponenten_FERT",
+                                na_filter=False)
+
+            PF=[]
+            for file in files:
+                PF.append(len(dfsPF[file.name].index))
+
+            SumFERT=sum(PF)
+
+            dfsPH={}
+            for file in files:
+                dfsPH[f"{file.name}"]=pd.read_excel(file,
+                                engine="openpyxl",
+                                sheet_name="Komponenten_HIBE",
+                                na_filter=False)
+
+            PH=[]
+            for file in files:
+                PH.append(len(dfsPH[file.name].index))
+
+            SumHIBE=sum(PH)
+
+            dfsPN={}
+            for file in files:
+                dfsPN[f"{file.name}"]=pd.read_excel(file,
+                                engine="openpyxl",
+                                sheet_name="Komponenten_NORM",
+                                na_filter=False)              
+
+            PN=[]
+            for file in files:
+                PN.append(len(dfsPN[file.name].index))
+
+            SumNORM=sum(PN)
+
+            dfsP={}
+            for file in files:
+                dfsP[f"{file.name}"]=pd.read_excel(file,
+                                engine="openpyxl",
+                                sheet_name=sheet,
+                                na_filter=False)
+
+            SumGEN=SumFERT+SumHIBE+SumNORM
+
+            AnFERT=SumFERT/SumGEN
+            AnHIBE=SumHIBE/SumGEN
+            AnNORM=SumNORM/SumGEN
+
+            MW=[]
+            for i in dfsP:
+                MW.append(sum(dfsP[i]["Effizienz"])/len(dfsP[i].index))
+
+            MWN=[]
+            for file in files:
+                MWN.append(file.name.split("_")[0])
+
+            fig = make_subplots(
+                rows=3, cols=2,
+                specs=[[{},{"type":"domain"}],
+                    [{"colspan": 2}, None],
+                    [{"type":"indicator"},{"type":"indicator"}]]
+            )
+
+            fig.add_trace(go.Bar(y=MW, x=MWN), row=1, col=1)
+            fig.update_traces(marker_color="#0082B4", 
+                            showlegend=False,
+                            hovertemplate = "%{label}: <br>%{value}",
+                            row=1, col=1)
+            fig.update_xaxes(categoryorder='total descending',
+                            showticklabels=False, 
+                            showgrid=False,
+                            row=1, col=1)
+            fig.update_yaxes(showgrid=False,
+                            title="Avg.Effizienz",
+                            tickfont_size=20,
+                            titlefont_size=30,
+                            titlefont_family="voestalpine",
+                            tickformat = ',.0%',
+                            row=1, col=1)
+
+            labels = ['FERT','HIBE','NORM']
+            values = [AnFERT, AnHIBE, AnNORM]
+
+            fig.add_trace(go.Pie(labels=labels, values=values, hole=.3),row=1,col=2)
+            fig.update_traces(marker=dict(colors=px.colors.qualitative.VoestBlue), 
+                            showlegend=False,
+                            title=" <br>MatGr.Aufteilung",
+                            titlefont_size=20,
+                            titlefont_family="voestalpine",
+                            titleposition="bottom center",
+                            textfont_size=18,
+                            textposition='inside',
+                            insidetextorientation='radial',
+                            textfont_family="voestalpine",
+                            hoverinfo='label+percent',
+                            textinfo='percent+label',
+                            row=1, col=2)
+
+            for i in dfs:
+                fig.add_trace(go.Scatter(x = dfs[i]["Prozent"],
+                                    y = dfs[i]["Effizienz"], 
+                                    name = i.split("_")[0],
+                                    mode='lines'),
+                                    row=2,col=1)
+
+            fig.update_xaxes(showgrid=False,
+                            showticklabels=False,
+                            row=2, col=1)
+            fig.update_yaxes(showgrid=False,
+                            title="Bauteileffizienz",
+                            tickfont_size=20,
+                            titlefont_size=30,
+                            titlefont_family="voestalpine",
+                            tickformat = ',.0%',
+                            row=2, col=1)        
+            fig.update_traces(showlegend=False,
+                            hoverinfo="name",
+                            hoverlabel_namelength=-1,
+                            row=2, col=1)
+
+
+            fig.add_trace(go.Indicator(
+                    mode = "gauge+number",
+                    value = avUni,
+                    number = {'suffix': "%"},
+                    title = {'text': "Universalanteil", 'font': {'size': 30, 'family': 'voestalpine'}},
+                    gauge = {"bar":{"color": "green"}, 'axis': {'range': [None, 100]}}),
+                    row=3, col=1)
+
+            fig.add_trace(go.Indicator(
+                    mode = "gauge+number",
+                    value = avExkl,
+                    number = {'suffix': "%"},
+                    title = {'text': "Exklusivanteil", 'font': {'size': 30, 'family': 'voestalpine'}},
+                    gauge = {"bar":{"color": "red"},'axis': {'range': [None, 100]}}),
+                    row=3, col=2)
+
+            fig.update_layout(plot_bgcolor="rgba(256,256,256,0)",
+                            legend_font=dict(family="voestalpine", size=18),
+                            legend=dict(
+                                orientation="h",
+                                yanchor="top",
+                                y=0.74,
+                                xanchor="left",
+                                x=0.01,
+                                bgcolor="rgba(256,256,256,0)"),
+                            height=1000)
+
+            st.plotly_chart(fig, use_container_width=True)
         
-            for i in range(ein):
-                if dfs[file.name].at[i,"Abfrage"] == 1:
-                    exklcount=exklcount+1
-
-            exklp=exklcount/ein
-            exklpL.append(exklp)
-        
-        SumUni=sum(unipL)
-        avUni=(SumUni/len(unipL))*100        
-        SumExkl=sum(exklpL)
-        avExkl=(SumExkl/len(exklpL))*100
-
-        dfsPF={}
-        for file in files:
-            dfsPF[f"{file.name}"]=pd.read_excel(file,
-                            engine="openpyxl",
-                            sheet_name="Komponenten_FERT",
-                            na_filter=False)
-        
-        PF=[]
-        for file in files:
-            PF.append(len(dfsPF[file.name].index))
-        
-        SumFERT=sum(PF)
-
-        dfsPH={}
-        for file in files:
-            dfsPH[f"{file.name}"]=pd.read_excel(file,
-                            engine="openpyxl",
-                            sheet_name="Komponenten_HIBE",
-                            na_filter=False)
-
-        PH=[]
-        for file in files:
-            PH.append(len(dfsPH[file.name].index))
-
-        SumHIBE=sum(PH)
-
-        dfsPN={}
-        for file in files:
-            dfsPN[f"{file.name}"]=pd.read_excel(file,
-                            engine="openpyxl",
-                            sheet_name="Komponenten_NORM",
-                            na_filter=False)              
-
-        PN=[]
-        for file in files:
-            PN.append(len(dfsPN[file.name].index))
-
-        SumNORM=sum(PN)
-
-        dfsP={}
-        for file in files:
-            dfsP[f"{file.name}"]=pd.read_excel(file,
-                            engine="openpyxl",
-                            sheet_name=sheet,
-                            na_filter=False)
-
-        SumGEN=SumFERT+SumHIBE+SumNORM
-
-        AnFERT=SumFERT/SumGEN
-        AnHIBE=SumHIBE/SumGEN
-        AnNORM=SumNORM/SumGEN
-        
-        MW=[]
-        for i in dfsP:
-            MW.append(sum(dfsP[i]["Effizienz"])/len(dfsP[i].index))
-        
-        MWN=[]
-        for file in files:
-            MWN.append(file.name.split("_")[0])
-
-        fig = make_subplots(
-            rows=3, cols=2,
-            specs=[[{},{"type":"domain"}],
-                [{"colspan": 2}, None],
-                [{"type":"indicator"},{"type":"indicator"}]]
-        )
-
-        fig.add_trace(go.Bar(y=MW, x=MWN), row=1, col=1)
-        fig.update_traces(marker_color="#0082B4", 
-                        showlegend=False,
-                        hovertemplate = "%{label}: <br>%{value}",
-                        row=1, col=1)
-        fig.update_xaxes(categoryorder='total descending',
-                        showticklabels=False, 
-                        showgrid=False,
-                        row=1, col=1)
-        fig.update_yaxes(showgrid=False,
-                        title="Avg.Effizienz",
-                        tickfont_size=20,
-                        titlefont_size=30,
-                        titlefont_family="voestalpine",
-                        tickformat = ',.0%',
-                        row=1, col=1)
-
-        labels = ['FERT','HIBE','NORM']
-        values = [AnFERT, AnHIBE, AnNORM]
-        
-        fig.add_trace(go.Pie(labels=labels, values=values, hole=.3),row=1,col=2)
-        fig.update_traces(marker=dict(colors=px.colors.qualitative.VoestBlue), 
-                        showlegend=False,
-                        title=" <br>MatGr.Aufteilung",
-                        titlefont_size=20,
-                        titlefont_family="voestalpine",
-                        titleposition="bottom center",
-                        textfont_size=18,
-                        textposition='inside',
-                        insidetextorientation='radial',
-                        textfont_family="voestalpine",
-                        hoverinfo='label+percent',
-                        textinfo='percent+label',
-                        row=1, col=2)
-
-        for i in dfs:
-            fig.add_trace(go.Scatter(x = dfs[i]["Prozent"],
-                                y = dfs[i]["Effizienz"], 
-                                name = i.split("_")[0],
-                                mode='lines'),
-                                row=2,col=1)
-        
-        fig.update_xaxes(showgrid=False,
-                        showticklabels=False,
-                        row=2, col=1)
-        fig.update_yaxes(showgrid=False,
-                        title="Bauteileffizienz",
-                        tickfont_size=20,
-                        titlefont_size=30,
-                        titlefont_family="voestalpine",
-                        tickformat = ',.0%',
-                        row=2, col=1)        
-        fig.update_traces(showlegend=False,
-                        hoverinfo="name",
-                        hoverlabel_namelength=-1,
-                        row=2, col=1)
-
-
-        fig.add_trace(go.Indicator(
-                mode = "gauge+number",
-                value = avUni,
-                number = {'suffix': "%"},
-                title = {'text': "Universalanteil", 'font': {'size': 30, 'family': 'voestalpine'}},
-                gauge = {"bar":{"color": "green"}, 'axis': {'range': [None, 100]}}),
-                row=3, col=1)
-
-        fig.add_trace(go.Indicator(
-                mode = "gauge+number",
-                value = avExkl,
-                number = {'suffix': "%"},
-                title = {'text': "Exklusivanteil", 'font': {'size': 30, 'family': 'voestalpine'}},
-                gauge = {"bar":{"color": "red"},'axis': {'range': [None, 100]}}),
-                row=3, col=2)
-
-        fig.update_layout(plot_bgcolor="rgba(256,256,256,0)",
-                        legend_font=dict(family="voestalpine", size=18),
-                        legend=dict(
-                            orientation="h",
-                            yanchor="top",
-                            y=0.74,
-                            xanchor="left",
-                            x=0.01,
-                            bgcolor="rgba(256,256,256,0)"),
-                        height=1000)
-
-        st.plotly_chart(fig, use_container_width=True)
+        except ZeroDivisionError:
+            st.write("Bitte uploaden Sie die Analyse-Dateien!")
 
 if selected_hor == "ABC-Analyse":
     
