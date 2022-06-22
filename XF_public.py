@@ -41,8 +41,8 @@ font-weight: 400;
 #Horizontales Optionsmenü erstellen
 selected_hor=option_menu(
     menu_title=None,
-    options=("Overview","Effizienz-Analyse","ABC-Analyse","SAP-Export"),
-    icons=("bezier", "bar-chart-fill", "cloud-arrow-up", "calculator-fill"),
+    options=("Overview","Effizienz-Analyse","ABC-Analyse"),
+    icons=("bezier", "bar-chart-fill", "cloud-arrow-up"),
     default_index=0,
     menu_icon="cast",
     orientation="horizontal",
