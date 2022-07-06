@@ -40,7 +40,7 @@ font-weight: 400;
 selected_hor=option_menu(
     menu_title=None,
     options=("Overview","Effizienz-Analyse","ABC-Analyse"),
-    icons=("bezier", "bar-chart-fill", "cloud-arrow-up"),
+    icons=("bezier", "bar-chart-fill", "calculator-fill"),
     default_index=1,
     menu_icon="cast",
     orientation="horizontal",
