@@ -306,21 +306,37 @@ if selected_hor == "Overview":
                             row=2, col=1)
 
             #Zeigerdiagramm (Universalanteil) einfügen
-            fig.add_trace(go.Indicator(
-                    mode = "gauge+number",
+            fig.add_trace(go.Indicator(domain = {'x': [0, 1], 'y': [0, 1]},
                     value = avUni,
+                    mode = "gauge+number",
+                    title = {'text': "Universalanteil", 'font': {'size': 40, 'family': 'voestalpine'}},
+                    #delta = {'reference': 50},
                     number = {'suffix': "%"},
-                    title = {'text': "Universalanteil", 'font': {'size': 30, 'family': 'voestalpine'}},
-                    gauge = {"bar":{"color": "green"}, 'axis': {'range': [None, 100]}}),
+                    gauge = {
+                        "bar":{"color": "black"},
+                        'axis': {'range': [None, 100]},
+                        'steps' : [
+                            {'range': [0, 33], 'color': "red"},
+                            {'range': [33, 66], 'color': "yellow"},
+                            {'range': [66, 100], 'color': "green"}],
+                    }),
                     row=3, col=1)
 
             #Zeigerdiagramm (Exklusivanteil) einfügen
-            fig.add_trace(go.Indicator(
-                    mode = "gauge+number",
+            fig.add_trace(go.Indicator(domain = {'x': [0, 1], 'y': [0, 1]},
                     value = avExkl,
+                    mode = "gauge+number",
+                    title = {'text': "Exklusivanteil", 'font': {'size': 40, 'family': 'voestalpine'}},
+                    #delta = {'reference': 50},
                     number = {'suffix': "%"},
-                    title = {'text': "Exklusivanteil", 'font': {'size': 30, 'family': 'voestalpine'}},
-                    gauge = {"bar":{"color": "red"},'axis': {'range': [None, 100]}}),
+                    gauge = {
+                        "bar":{"color": "black"},
+                        'axis': {'range': [None, 100]},
+                        'steps' : [
+                            {'range': [0, 33], 'color': "green"},
+                            {'range': [33, 66], 'color': "yellow"},
+                            {'range': [66, 100], 'color': "red"}],
+                    }),
                     row=3, col=2)
 
             #Dashlayout anpassen
