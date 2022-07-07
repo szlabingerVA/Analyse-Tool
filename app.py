@@ -313,12 +313,8 @@ if selected_hor == "Overview":
                     #delta = {'reference': 50},
                     number = {'suffix': "%"},
                     gauge = {
-                        "bar":{"color": "black"},
-                        'axis': {'range': [None, 100]},
-                        'steps' : [
-                            {'range': [0, 33], 'color': "red"},
-                            {'range': [33, 66], 'color': "yellow"},
-                            {'range': [66, 100], 'color': "green"}],
+                        "bar":{"color": "green"},
+                        'axis': {'range': [None, 100]}
                     }),
                     row=3, col=1)
 
@@ -330,12 +326,8 @@ if selected_hor == "Overview":
                     #delta = {'reference': 50},
                     number = {'suffix': "%"},
                     gauge = {
-                        "bar":{"color": "black"},
-                        'axis': {'range': [None, 100]},
-                        'steps' : [
-                            {'range': [0, 33], 'color': "green"},
-                            {'range': [33, 66], 'color': "yellow"},
-                            {'range': [66, 100], 'color': "red"}],
+                        "bar":{"color": "red"},
+                        'axis': {'range': [None, 100]}
                     }),
                     row=3, col=2)
 
@@ -730,12 +722,8 @@ if selected_hor == "Effizienz-Analyse":
             #delta = {'reference': 50},
             number = {'suffix': "%"},
             gauge = {
-                    "bar":{"color": "black"},
-                    'axis': {'range': [None, 100]},
-                    'steps' : [
-                        {'range': [0, 33], 'color': "red"},
-                        {'range': [33, 66], 'color': "yellow"},
-                        {'range': [66, 100], 'color': "green"}],
+                    "bar":{"color": "green"},
+                    'axis': {'range': [None, 100]}
                     }))
 
         #Zeigerdiagramm (Exklusivanteil) erstellen
@@ -747,12 +735,8 @@ if selected_hor == "Effizienz-Analyse":
             #delta = {'reference': 50},
             number = {'suffix': "%"},
             gauge = {
-                    "bar":{"color": "black"},
-                    'axis': {'range': [None, 100]},
-                    'steps' : [
-                        {'range': [0, 33], 'color': "green"},
-                        {'range': [33, 66], 'color': "yellow"},
-                        {'range': [66, 100], 'color': "red"}],
+                    "bar":{"color": "red"},
+                    'axis': {'range': [None, 100]} 
                     }))
 
         #Zeigerdiagramm (Universalanteil) anzeigen
