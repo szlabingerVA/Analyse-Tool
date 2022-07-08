@@ -711,7 +711,7 @@ if selected_hor == "Effizienz-Analyse":
             st.dataframe(df.loc[:, ["Komponentennummer", "Effizienz", "Materialart", "Objektsparte"]], height=210)
 
         #Spalten definieren
-        col111, col112, col113 = st.columns((2,1,2))
+        col111, col112, col113 = st.columns((8,5,8))
 
         #Zeigerdiagramm (Universalanteil) erstellen
         fig_uni = go.Figure(go.Indicator(
@@ -757,5 +757,5 @@ if selected_hor == "Effizienz-Analyse":
 
         #Häufigesten Bauteile mittels Dataframe visualisieren
         with col112:
-            st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">Häufigsten<br>Bauteile</p>', unsafe_allow_html=True)
+            st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">Häufigsten<br>Komponenten</p>', unsafe_allow_html=True)
             st.dataframe(dftop)
