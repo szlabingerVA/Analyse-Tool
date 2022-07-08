@@ -624,7 +624,7 @@ if selected_hor == "Effizienz-Analyse":
         #Balkendiagramm (Bauteileffizienz) erstellen
         fig_area = px.bar(
             data_frame=df, y="Effizienz", x="Komponentennummer",
-            labels=dict(Komponentennummer="Komponentenanzahl", Effizienz="Bauteileffizienz"), 
+            labels=dict(Komponentennummer="Komponenten", Effizienz="Bauteileffizienz"), 
             height=500,
             range_y=(0,100),
             base=None,
