@@ -711,7 +711,7 @@ if selected_hor == "Effizienz-Analyse":
             st.dataframe(df.loc[:, ["Komponentennummer", "Effizienz", "Materialart", "Objektsparte"]], height=210)
 
         #Spalten definieren
-        col111, col112 = st.columns((1,1))
+        col111, col112, col113 = st.columns((2,1,2))
 
         #Zeigerdiagramm (Universalanteil) erstellen
         fig_uni = go.Figure(go.Indicator(
@@ -744,5 +744,18 @@ if selected_hor == "Effizienz-Analyse":
             st.plotly_chart(fig_uni, use_container_width=True, height=500)
 
         #Zeigerdiagramm (Exklusivanteil) anzeigen
-        with col112:
+        with col113:
             st.plotly_chart(fig_exkl, use_container_width=True)
+
+        #Häufigsten Bauteile ermitteln
+        n = 5
+        topl=df['Objektsparte'].value_counts().index.tolist()[:n]
+        topl.insert(0, "test")
+        data= {"Komponenten":topl}
+        dftop=pd.DataFrame(data)
+        dftop = dftop.iloc[1: , :]
+
+        #Häufigesten Bauteile mittels Dataframe visualisieren
+        with col112:
+            st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">Häufigsten<br>Bauteile</p>', unsafe_allow_html=True)
+            st.write(dftop.astype("object"), width=100)
