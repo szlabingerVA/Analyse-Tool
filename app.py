@@ -758,4 +758,4 @@ if selected_hor == "Effizienz-Analyse":
         #Häufigesten Bauteile mittels Dataframe visualisieren
         with col112:
             st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">Häufigsten<br>Bauteile</p>', unsafe_allow_html=True)
-            st.write(dftop.astype("object"))
+            st.dataframe(dftop)
