@@ -1065,6 +1065,8 @@ if selected_hor == "Portfolio":
                 test = st_echarts(option,height=600,events=events)
 
             frame=dfp.loc[dfp['Klasse'] == test].astype(str)
+            
+            frame.dropna(subset=["Materialart"], inplace=True)
 
             if test is not None:
                     
