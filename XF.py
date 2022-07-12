@@ -1064,14 +1064,15 @@ if selected_hor == "Portfolio":
 
                 test = st_echarts(option,height=600,events=events)
 
-            frame=dfp.loc[dfp['Klasse'] == test].astype(str)
-            
+            frame=dfp.loc[dfp['Klasse'] == test]
+
             frame.dropna(subset=["Materialart"], inplace=True)
+
+            f=frame.astype(str)
 
             if test is not None:
                     
-                st.dataframe(frame.loc[:, ["MatNr.", "Objektkurztext", "Materialart", "Warengruppe"]])
-
+                st.dataframe(f.loc[:, ["MatNr.", "Objektkurztext", "Materialart", "Warengruppe"]])
                 
         #Bei fehlenden Input:
         except ValueError:
