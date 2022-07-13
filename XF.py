@@ -1056,7 +1056,7 @@ if selected_hor == "Portfolio":
                 
                 events = {"click": "function(params) { return params.seriesName }"}
 
-                test = st_echarts(option,height=600,events=events)
+                test = st_echarts(option,height=1000,events=events)
 
             frame=dfp.loc[dfp['Klasse'] == test]
 
