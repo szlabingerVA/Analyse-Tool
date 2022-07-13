@@ -1056,7 +1056,7 @@ if selected_hor == "Portfolio":
                 
                 events = {"click": "function(params) { return params.seriesName }"}
 
-                test = st_echarts(option,height=1000,events=events)
+                test = st_echarts(option,height=600,events=events)
 
             frame=dfp.loc[dfp['Klasse'] == test]
 
@@ -1066,7 +1066,7 @@ if selected_hor == "Portfolio":
 
             if test is not None:
                     
-                st.dataframe(f.loc[:, ["MatNr.", "Objektkurztext", "Materialart", "Warengruppe"]])
+                st.dataframe(f.loc[:, ["MatNr.", "Objektkurztext", "Materialart", "Warengruppe"]], height=600)
                 
         #Bei fehlenden Input:
         except ValueError:
