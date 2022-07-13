@@ -1126,7 +1126,7 @@ if selected_hor == "Portfolio":
                 st.download_button(
                     label="Download Auswertung",
                     data=buffer,
-                    file_name="Export.xlsx",
+                    file_name=file.name.split("_")[0]+file.name.split("_")[1]+"_"+output+".xlsx",
                     mime="application/vnd.ms-excel"
                 )
             
