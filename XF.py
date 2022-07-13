@@ -1118,17 +1118,17 @@ if selected_hor == "Portfolio":
                 #st.dataframe(f.loc[:, ["MatNr.", "Objektkurztext", "Materialart", "Warengruppe"]], height=600)
                 AgGrid(f,gridOptions=grid_options, theme="streamlit", height= 600,fit_columns_on_grid_load=True, editable=False)
 
-            buffer = io.BytesIO()
+                buffer = io.BytesIO()
 
-            with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
-                f.to_excel(writer)
+                with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
+                    f.to_excel(writer)
 
-            st.download_button(
-                label="Download Auswertung",
-                data=buffer,
-                file_name="Export.xlsx",
-                mime="application/vnd.ms-excel"
-            )
+                st.download_button(
+                    label="Download Auswertung",
+                    data=buffer,
+                    file_name="Export.xlsx",
+                    mime="application/vnd.ms-excel"
+                )
             
             st.stop()
 
