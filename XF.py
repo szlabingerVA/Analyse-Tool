@@ -346,7 +346,9 @@ if selected_hor == "Overview":
             
             #Dash anzeigen
             st.plotly_chart(fig, use_container_width=True)
-
+            
+            st.stop()
+            
         #Bei fehlenden Input:
         except ZeroDivisionError:
             st.write("Bitte uploaden Sie die Analyse-Dateien!")
@@ -511,6 +513,8 @@ if selected_hor == "ABC-Analyse":
             #ABC-Dataframe anzeigen
             with col22:
                 st.dataframe(dfr, height=400, width=600)
+            
+            st.stop()
 
     except ValueError:
         st.write("Die Input-Datei hat keine passende ABC-Aufschlüsselung!")
@@ -760,7 +764,9 @@ if selected_hor == "Effizienz-Analyse":
         with col112:
             st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">Häufigsten<br>Komponenten</p>', unsafe_allow_html=True)
             st.write(dftop.astype("object"), width=100)
-
+        
+        st.stop()
+        
 #Option Portfolio
 if selected_hor == "Portfolio":
 
@@ -1067,7 +1073,9 @@ if selected_hor == "Portfolio":
             if test is not None:
                     
                 st.dataframe(f.loc[:, ["MatNr.", "Objektkurztext", "Materialart", "Warengruppe"]], height=600)
-                
+            
+            st.stop()
+            
         #Bei fehlenden Input:
         except ValueError:
             st.write("Bitte uploaden Sie die Analyse-Dateien!")
