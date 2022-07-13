@@ -803,40 +803,34 @@ if selected_hor == "Portfolio":
                             na_filter=True)
 
             col111,col112,col113,col114 = st.columns((1,1,1,1))
-            col11, col12 = st.columns((1,3))
+            col11, col12 = st.columns((2,5))
 
             with col112:
-                st.markdown('<p style="text-align: center;color: #0082B4;font-size:26px">Klasse A</p>', unsafe_allow_html=True)
+                st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Klasse A</p>', unsafe_allow_html=True)
 
             with col113:
-                st.markdown('<p style="text-align: center;color: #0082B4;font-size:26px">Klasse B</p>', unsafe_allow_html=True)
+                st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Klasse B</p>', unsafe_allow_html=True)
             
             with col114:
-                st.markdown('<p style="text-align: center;color: #0082B4;font-size:26px">Klasse C</p>', unsafe_allow_html=True)
+                st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Klasse C</p>', unsafe_allow_html=True)
             
             with col11:
                 st. write("")
                 st. write("")
-                st. write("")
-                st. write("")
-                st.markdown('<p style="text-align: center;color: #0082B4;font-size:26px">Top Effizienz</p>', unsafe_allow_html=True)
-                st. write("")
-                st. write("")
+                st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">Top Effizienz</p>', unsafe_allow_html=True)
+                st.markdown('<p style="text-align: center;color: #FFF;font-size:26px">66 bis 100%</p>', unsafe_allow_html=True)
                 st. write("")
                 st. write("")
                 st. write("")
                 st. write("")
-                st. write("")
-                st.markdown('<p style="text-align: center;color: #0082B4;font-size:26px">Medium Effizienz</p>', unsafe_allow_html=True)
-                st. write("")
-                st. write("")
+                st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">Medium Effizienz</p>', unsafe_allow_html=True)
+                st.markdown('<p style="text-align: center;color: #FFF;font-size:26px">33 bis 66%</p>', unsafe_allow_html=True)
                 st. write("")
                 st. write("")
                 st. write("")
                 st. write("")
-                st. write("")
-                st.markdown('<p style="text-align: center;color: #0082B4;font-size:26px">Low Effizienz</p>', unsafe_allow_html=True)
-
+                st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">Low Effizienz</p>', unsafe_allow_html=True)
+                st.markdown('<p style="text-align: center;color: #FFF;font-size:26px">0 bis 33%</p>', unsafe_allow_html=True)
             with col12:
                 option = {
                     "dataset":{},
