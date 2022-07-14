@@ -845,7 +845,7 @@ if selected_hor == "Portfolio":
                 option = {
                     "dataset":{},
                     "tooltip":{
-                        "show":True,
+                        "show":False,
                     },
                     "series": [
                         {
