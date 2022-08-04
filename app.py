@@ -84,7 +84,7 @@ if selected_hor == "Overview":
 
     iNames=[]
     for i in iFiles:
-        iNames.append(i.name.split("_")[2])
+        iNames.append(i.name.split("_")[0]+i.name.split("_")[2])
     
     iNames=list(dict.fromkeys(iNames))
 
@@ -752,7 +752,7 @@ if selected_hor == "ABC-Analyse":
 
         iNames=[]
         for i in iFiles:
-            iNames.append(i.name.split("_")[2])
+            iNames.append(i.name.split("_")[0]+i.name.split("_")[2])
         
         iNames=list(dict.fromkeys(iNames))
 
@@ -929,7 +929,7 @@ if selected_hor == "Effizienz-Analyse":
 
     iNames=[]
     for i in iFiles:
-        iNames.append(i.name.split("_")[2])
+        iNames.append(i.name.split("_")[0]+i.name.split("_")[2])
     
     iNames=list(dict.fromkeys(iNames))
 
@@ -1232,7 +1232,7 @@ if selected_hor == "Portfolio":
 
     iNames=[]
     for i in iFiles:
-        iNames.append(i.name.split("_")[2])
+        iNames.append(i.name.split("_")[0]+i.name.split("_")[2])
     
     iNames=list(dict.fromkeys(iNames))
 
