@@ -891,7 +891,7 @@ if selected_hor == "ABC-Analyse":
                 st.plotly_chart(fig_bar2, use_container_width=True)
             
             #Spalten definieren
-            col21, col22, col23 = st.columns((1,6,1))
+            col21, col22, col23 = st.columns((1,1,1))
 
             #ABC-Dataframe anzeigen
             with col22:
