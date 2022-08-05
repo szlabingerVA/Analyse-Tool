@@ -515,9 +515,9 @@ if selected_hor == "Overview":
                     { "top": '0%',"left":"0%","width":"30%","height":"30%" }, 
                     { "top": '0%',"left":"35%","width":"30%","height":"30%" },
                     { "top": '0%',"right":"0%","width":"30%","height":"30%" },
-                    { "top": '35%',"left":"0%","width":"30%","height":"30%" },
-                    { "top": '35%',"left":"35%","width":"30%","height":"30%" },
-                    { "top": '35%',"right":"0%","width":"30%","height":"30%" },
+                    { "top": '33.5%',"left":"0%","width":"30%","height":"30%" },
+                    { "top": '33.5%',"left":"35%","width":"30%","height":"30%" },
+                    { "top": '33.5%',"right":"0%","width":"30%","height":"30%" },
                     { "bottom": '3%',"left":"0%","width":"30%","height":"30%" },
                     { "bottom": '3%',"left":"35%","width":"30%","height":"30%" },
                     { "bottom": '3%',"right":"0%","width":"30%","height":"30%" }
