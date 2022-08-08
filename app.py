@@ -1341,8 +1341,6 @@ if selected_hor == "Effizienz-Analyse":
         with col112:
             st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">Häufigsten<br>Komponenten</p>', unsafe_allow_html=True)
             st.write(dftop.astype("object"), width=120)
-        
-        st.stop()
 
 #Option Portfolio
 if selected_hor == "Portfolio":
