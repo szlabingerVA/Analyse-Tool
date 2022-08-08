@@ -691,8 +691,6 @@ if selected_hor == "Overview":
             with col12:
                 st_echarts(option, height=620)
 
-            st.stop()
-
         #Bei fehlenden Input:
         except ZeroDivisionError:
             st.write("Bitte uploaden Sie die Analyse-Dateien!")
@@ -1035,8 +1033,6 @@ if selected_hor == "ABC-Analyse":
                 #ABC-Dataframe anzeigen
                 with col22:
                     st.dataframe(dfr, height=400, width=600)
-
-            st.stop()
 
     except ValueError:
         st.write("Die Input-Datei hat keine passende ABC-Aufschlüsselung!")
@@ -1923,8 +1919,6 @@ if selected_hor == "Portfolio":
                             file_name=file.name.split("_")[0]+file.name.split("_")[1]+".xlsx",
                             mime="application/vnd.ms-excel"
                         )
-
-            st.stop()
 
         #Bei fehlenden Input:
         except ValueError:
