@@ -287,7 +287,6 @@ if selected_hor == "Overview":
             figD.update_traces(showlegend=True,
                             hoverinfo="name+y",
                             hoverlabel_namelength=-1,
-                            marker=dict(color=px.colors.qualitative.Chart),
                             row=1, col=1)
             
             #Dashlayout anpassen
