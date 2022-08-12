@@ -701,7 +701,7 @@ if selected_hor == "Overview":
                         "yAxisIndex": 0,
                         "type": 'bar',
                         "stack": "total",
-                        "color":"#A5A5A5"
+                        "color":"#FFF"
                     },
                     {
                         "data":[d0, d3, d2, d1],
