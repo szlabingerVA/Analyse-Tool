@@ -1784,7 +1784,7 @@ if selected_hor == "Portfolio":
             if selected_side=="Normteile":
                 dfp=dfp.loc[dfp['Materialart'] == "NORM"]
 
-            col111,col112,col113,col114 = st.columns((1,1,1,1))
+            col111,col112,col113,col114 = st.columns((7,6,6,6))
             col11, col12 = st.columns((2,5))
 
             with col112:
