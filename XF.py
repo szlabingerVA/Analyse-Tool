@@ -368,7 +368,7 @@ if selected_hor == "Overview":
                             "color":"white",
                             "position":"top",
                             "fontFamily":"voestalpine",
-                            "fontSize":30,
+                            "fontSize":25,
                             #"rotate":90,
                             "padding":[0,0,-40,0],
                             "align":"center",
