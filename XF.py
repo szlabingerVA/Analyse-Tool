@@ -701,7 +701,17 @@ if selected_hor == "Overview":
                         "yAxisIndex": 0,
                         "type": 'bar',
                         "stack": "total",
-                        "color":"#FFF"
+                        "color":"#FFF",
+                        "itemStyle":{
+                            "decal":{
+                                "symbol":"rect",
+                                "symbolSize":0.95,
+                                "color":"#0082B4",
+                                "dashArrayX":[1,0],
+                                "dashArrayY":[2,4],
+                                "rotation": 0.785
+                            }
+                        }
                     },
                     {
                         "data":[d0, d3, d2, d1],
