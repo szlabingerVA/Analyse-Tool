@@ -506,7 +506,7 @@ if selected_hor == "Overview":
                         "textStyle": {
                         "fontFamily":"voestalpine",
                         "fontWeight":"normal",
-                        "fontSize":40,
+                        "fontSize":30,
                         "color": '#0082B4'
                         }
                         }
@@ -590,7 +590,7 @@ if selected_hor == "Overview":
                     "textStyle": {
                     "fontFamily":"voestalpine",
                     "fontWeight":"normal",
-                    "fontSize":40,
+                    "fontSize":30,
                     "color": '#0082B4'
                     }
                     }
