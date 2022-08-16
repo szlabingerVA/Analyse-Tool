@@ -2157,31 +2157,40 @@ if selected_hor == "Portfolio":
             if output != None:
 
                 if output == "Top-A":
-                    st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie werden in vielen Varianten eingesetzt, die einen hohen Umsatz generieren.</p>', unsafe_allow_html=True)
+                    #st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie werden in vielen Varianten eingesetzt, die einen hohen Umsatz generieren.</p>', unsafe_allow_html=True)
+                    st.info("Komponenten dieser Kategorie werden in vielen Varianten eingesetzt, die einen hohen Umsatz generieren.")
 
                 if output == "Top-B":
-                    st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie werden in vielen Varianten eingesetzt, sind jedoch nicht umsatzentscheidend.</p>', unsafe_allow_html=True)
+                    #st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie werden in vielen Varianten eingesetzt, sind jedoch nicht umsatzentscheidend.</p>', unsafe_allow_html=True)
+                    st.info("Komponenten dieser Kategorie werden in vielen Varianten eingesetzt, sind jedoch nicht umsatzentscheidend.")
 
                 if output == "Top-C":
-                    st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie werden in vielen Varianten eingesetzt, bringen jedoch keinen Umsatz.</p>', unsafe_allow_html=True)
-
+                    #st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie werden in vielen Varianten eingesetzt, bringen jedoch keinen Umsatz.</p>', unsafe_allow_html=True)
+                    st.info("Komponenten dieser Kategorie werden in vielen Varianten eingesetzt, bringen jedoch keinen Umsatz.")
+                    
                 if output == "Medium-A":
-                    st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie weisen eine mittlere Effizienz auf, generieren jedoch einen hohen Umsatz.</p>', unsafe_allow_html=True)
+                    #st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie weisen eine mittlere Effizienz auf, generieren jedoch einen hohen Umsatz.</p>', unsafe_allow_html=True)
+                    st.info("Komponenten dieser Kategorie weisen eine mittlere Effizienz auf, generieren jedoch einen hohen Umsatz.")
 
                 if output == "Medium-B":
-                    st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie weisen eine mittlere Effizienz auf, sind jedoch nicht umsatzentscheidend.</p>', unsafe_allow_html=True)
+                    #st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie weisen eine mittlere Effizienz auf, sind jedoch nicht umsatzentscheidend.</p>', unsafe_allow_html=True)
+                    st.info("Komponenten dieser Kategorie weisen eine mittlere Effizienz auf, sind jedoch nicht umsatzentscheidend.")
 
                 if output == "Medium-C":
-                    st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie weisen eine mittlere Effizienz auf, bringen jedoch keinen Umsatz.</p>', unsafe_allow_html=True)
+                    #st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie weisen eine mittlere Effizienz auf, bringen jedoch keinen Umsatz.</p>', unsafe_allow_html=True)
+                    st.info("Komponenten dieser Kategorie weisen eine mittlere Effizienz auf, bringen jedoch keinen Umsatz.")
 
                 if output == "Low-A":
-                    st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie werden nur in wenigen Varianten verbaut, welche jedoch einen hohen Anteil am Umsatz haben.</p>', unsafe_allow_html=True)
+                    #st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie werden nur in wenigen Varianten verbaut, welche jedoch einen hohen Anteil am Umsatz haben.</p>', unsafe_allow_html=True)
+                    st.info("Komponenten dieser Kategorie werden nur in wenigen Varianten verbaut, welche jedoch einen hohen Anteil am Umsatz haben.")
 
                 if output == "Low-B":
-                    st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie werden nur in wenigen Varianten verbaut und generieren keinen wesentlichen Umsatz.</p>', unsafe_allow_html=True)
-
+                    #st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie werden nur in wenigen Varianten verbaut und generieren keinen wesentlichen Umsatz.</p>', unsafe_allow_html=True)
+                    st.info("Komponenten dieser Kategorie werden nur in wenigen Varianten verbaut und generieren keinen wesentlichen Umsatz.")
+                    
                 if output == "Low-C":
-                    st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie werden nur in wenigen Varianten verbaut und generieren keinen Umsatz.</p>', unsafe_allow_html=True)
+                    #st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie werden nur in wenigen Varianten verbaut und generieren keinen Umsatz.</p>', unsafe_allow_html=True)
+                    st.info("Komponenten dieser Kategorie werden nur in wenigen Varianten verbaut und generieren keinen Umsatz.")
 
             colp1,colp2=st.columns((1,1))
 
