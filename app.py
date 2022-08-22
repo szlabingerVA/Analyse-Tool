@@ -1772,7 +1772,9 @@ if selected_hor == "Portfolio":
                             engine="openpyxl",
                             sheet_name="Portfolio",
                             na_filter=True)
-
+            
+            dfp.dropna(inplace=True)
+            
             dfp = dfp.astype({'MatNr.':'string'})
             
             if selected_side=="Fertigungsteile":
