@@ -15,7 +15,7 @@ st.set_page_config(page_title="Analyse Dashboard", page_icon=":bar_chart:", layo
 #Farbpaletten definieren
 px.colors.qualitative.VoestGrey=["#E3E3E3","#C4C4C4","#A5A5A5"]
 px.colors.qualitative.VoestBlue=["#91C8DC","#50AACD","#0082B4"]
-palette=cycle(["#0082B4","#E3E3E3","#87D25A","#E1D22D"])
+palette=cycle(["#0082B4","#50AACD","#A5A5A5","#E3E3E3"])
 
 pd.options.mode.chained_assignment = None 
 
