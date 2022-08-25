@@ -429,7 +429,7 @@ if selected_hor == "Overview":
                     ]
                 }
 
-                st_echarts(optionP,height=150,width="100%")
+                st_echarts(optionP,height=100,width="100%")
 
             avUni=float("{:.1f}".format(avUni))
             avExkl=float("{:.1f}".format(avExkl))
