@@ -400,7 +400,7 @@ if selected_hor == "Overview":
                         {
                         "name": 'Materialart',
                         "type": 'pie',
-                        "radius": '70%',
+                        "radius": '65%',
                         "center": ['50%', '50%'],
                         "data": [
                             { "value": AnFERT, "name": 'FERT' },
@@ -410,7 +410,7 @@ if selected_hor == "Overview":
                         "label": {
                             "color": '#0082B4',
                             "formatter": '{b}\n{c}%',
-                            "fontSize":17,
+                            "fontSize":20,
                         },
                         "labelLine": {
                             "lineStyle": {
