@@ -410,7 +410,7 @@ if selected_hor == "Overview":
                         "label": {
                             "color": '#0082B4',
                             "formatter": '{b}\n{c}%',
-                            "fontSize":18,
+                            "fontSize":17,
                         },
                         "labelLine": {
                             "lineStyle": {
