@@ -1055,7 +1055,7 @@ if selected_hor == "Overview":
 
         #Bei fehlenden Input:
         except ZeroDivisionError:
-            st.write("Bitte uploaden Sie die Analyse-Dateien!")
+            st.markdown('<p style="text-align: center;color: #FFF;font-size:20px">Bitte uploaden Sie die Analyse-Dateien!</p>', unsafe_allow_html=True)
 
 #Option ABC-Analyse
 if selected_hor == "ABC":
@@ -1725,7 +1725,7 @@ if selected_hor == "ABC":
                 AgGrid(dfg,gridOptions=grid_options, theme="streamlit", height= 400,fit_columns_on_grid_load=True, editable=False)
 
     except ValueError:
-        st.write("Die Input-Datei hat keine passende ABC-Aufschlüsselung!")
+        st.markdown('<p style="text-align: center;color: #FFF;font-size:20px">Die Input-Datei hat keine passende ABC-Aufschlüsselung!</p>', unsafe_allow_html=True)
 
 #Option Effizienz-Analyse
 if selected_hor == "Effizienz":
@@ -2894,7 +2894,7 @@ if selected_hor == "Portfolio":
 
         #Bei fehlenden Input:
         except ValueError:
-            st.write("Bitte uploaden Sie die Analyse-Dateien!")
+            st.markdown('<p style="text-align: center;color: #FFF;font-size:20px">Bitte uploaden Sie die Analyse-Dateien!</p>', unsafe_allow_html=True)
 
 #Option Stückliste
 if selected_hor == "Stückliste":
@@ -3197,4 +3197,4 @@ if selected_hor == "Stückliste":
 
         #Bei fehlenden Input:
         except ValueError:
-            st.write("Bitte uploaden Sie die Analyse-Dateien!")
+            st.markdown('<p style="text-align: center;color: #FFF;font-size:20px">Bitte uploaden Sie die Analyse-Dateien!</p>', unsafe_allow_html=True)
