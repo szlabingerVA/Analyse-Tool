@@ -3197,4 +3197,4 @@ if selected_hor == "Stückliste":
 
         #Bei fehlenden Input:
         except ValueError:
-            st.markdown('<p style="text-align: center;color: #FFF;font-size:20px">Bitte uploaden Sie die Analyse-Dateien!</p>', unsafe_allow_html=True)
+            st.markdown('<p style="text-align: center;color: #FFF;font-size:20px">Bitte wählen Sie einen Zeitraum!</p>', unsafe_allow_html=True)
