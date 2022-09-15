@@ -723,7 +723,7 @@ if selected_hor == "Overview":
                 },
                 "series":[
                     {
-                        "data":[0,var[3]-d0-d3-d2,var[3]-d0-d3,var[3]-d0],
+                        "data":[0,d1,d1+d2,d1+d2+d3],
                         "xAxisIndex": 0,
                         "yAxisIndex": 0,
                         "type": 'bar',
