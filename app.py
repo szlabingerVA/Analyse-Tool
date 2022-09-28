@@ -751,7 +751,7 @@ if selected_hor == "Overview":
                 ]
             }
 
-            'st_echarts(optionv, height=300, width="100%")
+            #st_echarts(optionv, height=300, width="100%")
 
             #Bereichüberschrift
             st.write(" ")
