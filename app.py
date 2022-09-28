@@ -663,22 +663,22 @@ if selected_hor == "Overview":
             colvo,colv1,colv2,colv3,colv4,colv5 = st.columns((1,2,2,2,2,1))
 
             #Werte ausgeben
-            with colv1:
+            #with colv1:
                 #st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">2018</p>', unsafe_allow_html=True)
                 #st.markdown(var1,unsafe_allow_html=True)
                 #st.markdown(r1,unsafe_allow_html=True)
 
-            with colv2:
+            #with colv2:
                 #st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">2019</p>', unsafe_allow_html=True)
                 #st.markdown(var2,unsafe_allow_html=True)
                 #st.markdown(r2,unsafe_allow_html=True)
 
-            with colv3:
+            #with colv3:
                 #st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">2020</p>', unsafe_allow_html=True)
                 #st.markdown(var3,unsafe_allow_html=True)
                 #st.markdown(r3,unsafe_allow_html=True)
 
-            with colv4:
+            #with colv4:
                 #st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">2021</p>', unsafe_allow_html=True)
                 #st.markdown(var4,unsafe_allow_html=True)
                 #st.markdown(r4,unsafe_allow_html=True)
