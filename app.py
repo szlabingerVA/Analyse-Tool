@@ -9,6 +9,7 @@ from streamlit_echarts import st_echarts
 from st_aggrid import AgGrid, GridOptionsBuilder
 from itertools import cycle
 
+#Das ist ein Test
 #Webapp Konfiguration
 st.set_page_config(page_title="Analyse Dashboard", page_icon=":bar_chart:", layout="centered")
 
