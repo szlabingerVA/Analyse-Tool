@@ -15,9 +15,11 @@ st.set_page_config(page_title="Analyse Dashboard", page_icon=":bar_chart:", layo
 #Farbpaletten definieren
 px.colors.qualitative.VoestGrey=["#E3E3E3","#C4C4C4","#A5A5A5"]
 px.colors.qualitative.VoestBlue=["#91C8DC","#50AACD","#0082B4"]
-palette=cycle(["#A5A5A5","#E3E3E3","#50AACD","#0082B4"])
-#palette=cycle(["#0082B4","#E3E3E3","#87D25A","#E1D22D"])
 
+#Chartfarbpalette
+palette=cycle(["#A5A5A5","#E3E3E3","#50AACD","#0082B4"])
+
+#Pandas-Library Setup
 pd.options.mode.chained_assignment = None
 
 #WebApp Kopf erstellen
@@ -29,17 +31,17 @@ with col02:
 st.markdown(
         """
         <style>
-@font-face {L
-font-family: 'voestalpine';
-font-style: normal;
-font-weight: 400;
-}
-    html, body, [class*="css"]  {
-    font-family: 'voestalpine';
-    font-size: 20px;
-    }
-    </style>
-    """,
+        @font-face {L
+        font-family: 'voestalpine';
+        font-style: normal;
+        font-weight: 400;
+        }
+        html, body, [class*="css"]  {
+        font-family: 'voestalpine';
+        font-size: 20px;
+        }
+        </style>
+        """,
         unsafe_allow_html=True,
     )
 
@@ -85,16 +87,21 @@ if selected_hor == "Overview":
     with st.expander("Upload"):
         iFiles = st.file_uploader("", accept_multiple_files=True, type=["xlsm"])
 
+    #Dateien nach Benennung sortieren
     iFiles.sort(key=lambda x: x.name.split("_")[2])
 
+    #Produktnamen filtern
     iNames=[]
     for i in iFiles:
         iNames.append(i.name.split("_")[0]+i.name.split("_")[2])
     
+    #Produktnamen in Liste umwandeln
     iNames=list(dict.fromkeys(iNames))
 
+    #Produktauswahl
     iFile=st.selectbox("Analyse-File Auswahl",iNames)
 
+    #Auswahl zuweisen
     filesInput=[]
     for i in iFiles:
         if i.name.split("_")[0]+i.name.split("_")[2]==iFile:
@@ -134,7 +141,6 @@ if selected_hor == "Overview":
                         sheet="Komponenten"
                     
                     #Overview Auswahl
-                    #files=st.multiselect("Jahresauswahl", filesInput, default=filesInput, format_func=lambda x: "von " + x.name.split("_")[1])
                     files=filesInput
 
             #Ausgewählte Dataframes kombinieren
@@ -314,10 +320,12 @@ if selected_hor == "Overview":
             #Dash anzeigen
             st.plotly_chart(figD, use_container_width=True)
             
+            #In Prozentwerte umwandeln
             MWs=[]
             for i in MW:
                 MWs.append(float("{:.1f}".format(i*100)))
 
+            #Durchschnittliche Effizienz
             optionB={
                 "tooltip": {
                     "show":True,
@@ -384,23 +392,27 @@ if selected_hor == "Overview":
             
             st_echarts(optionB, height=300, width="100%")
 
+            #Sidebar modifizieren
             with st.sidebar:
                 st.write(" ")
 
+                #Anteile ermitteln
                 AnFERT=float("{:.1f}".format(AnFERT*100))
                 AnHIBE=float("{:.1f}".format(AnHIBE*100))
                 AnNORM=float("{:.1f}".format(AnNORM*100))
 
+                #Daten zuweisen
                 labels = ['FERT','HIBE','NORM']
                 values = [AnFERT, AnHIBE, AnNORM]
 
+                #Materialart-Aufteilung
                 optionP={
                     "backgroundColor":'rgba(0, 0, 0, 0)',
                     "series": [
                         {
                         "name": 'Materialart',
                         "type": 'pie',
-                        "radius": '65%',
+                        "radius": '70%',
                         "center": ['50%', '50%'],
                         "data": [
                             { "value": AnFERT, "name": 'FERT' },
@@ -410,7 +422,7 @@ if selected_hor == "Overview":
                         "label": {
                             "color": '#0082B4',
                             "formatter": '{b}\n{c}%',
-                            "fontSize":18,
+                            "fontSize":20,
                         },
                         "labelLine": {
                             "lineStyle": {
@@ -430,11 +442,14 @@ if selected_hor == "Overview":
 
                 st_echarts(optionP,height=175,width="100%")
 
+            #In Prozentwerte umwandeln
             avUni=float("{:.1f}".format(avUni))
             avExkl=float("{:.1f}".format(avExkl))
 
+            #Spalten definieren
             colG1,colG2=st.columns((1,1))
             with colG1:
+                #Universalanteil
                 optionG1={
                     "series":[
                         {
@@ -519,6 +534,7 @@ if selected_hor == "Overview":
                 st_echarts(optionG1,height=400,width="100%")
             
             with colG2:
+                #Exklusivanteil
                 optionG2={
                 "series":[
                     {
@@ -618,54 +634,63 @@ if selected_hor == "Overview":
                             na_filter=False,
                             usecols="A")
             
+            #Variantenwerte zuweisen
             var=[]
             for i in dfd:
                 var.append(len(dfd[i].index))
             
-            var1 = f"""<style>p.a {{font:50px voestalpine;color: #FFF;text-align: center}}</style><p class="a">{var[0]}</p>"""
-            var2 = f"""<style>p.a {{font:50px voestalpine;color: #FFF;text-align: center}}</style><p class="a">{var[1]}</p>"""
-            var3 = f"""<style>p.a {{font:50px voestalpine;color: #FFF;text-align: center}}</style><p class="a">{var[2]}</p>"""
-            var4 = f"""<style>p.a {{font:50px voestalpine;color: #FFF;text-align: center}}</style><p class="a">{var[3]}</p>"""
-            
+            #Deltawerte berechnen
             d0=var[3]
             d1=var[0]-var[1]
             d2=var[1]-var[2]
             d3=var[2]-var[3]
+            
+            #Formtierung zuweisen
+            var1 = f"""<style>p.a {{font:50px voestalpine;color: #FFF;text-align: center}}</style><p class="a">{d1}</p>"""
+            var2 = f"""<style>p.a {{font:50px voestalpine;color: #FFF;text-align: center}}</style><p class="a">{d1+d2}</p>"""
+            var3 = f"""<style>p.a {{font:50px voestalpine;color: #FFF;text-align: center}}</style><p class="a">{d1+d2+d3}</p>"""
+            var4 = f"""<style>p.a {{font:50px voestalpine;color: #FFF;text-align: center}}</style><p class="a">{d1+d2+d3+d0}</p>"""
 
             r1 = f"""<style>p.b {{font:30px voestalpine;color: #0082B4;text-align: center}}</style><p class="b">+{d1}</p>"""
             r2 = f"""<style>p.b {{font:30px voestalpine;color: #0082B4;text-align: center}}</style><p class="b">+{d2}</p>"""
             r3 = f"""<style>p.b {{font:30px voestalpine;color: #0082B4;text-align: center}}</style><p class="b">+{d3}</p>"""
             r4 = f"""<style>p.b {{font:30px voestalpine;color: #0082B4;text-align: center}}</style><p class="b">+{d0}</p>"""
 
-            st.markdown('<p style="text-align: center;color: #0082B4;font-size:50px">Variantenentwicklung</p>', unsafe_allow_html=True)
+            #Bereichüberschrift
+            #st.markdown('<p style="text-align: center;color: #0082B4;font-size:50px">Variantenentwicklung</p>', unsafe_allow_html=True)
 
+            #Spalten definieren
             colvo,colv1,colv2,colv3,colv4,colv5 = st.columns((1,2,2,2,2,1))
 
-            with colv4:
-                st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">von 2018</p>', unsafe_allow_html=True)
-                st.markdown(var1,unsafe_allow_html=True)
-                st.markdown(r1,unsafe_allow_html=True)
+            #Werte ausgeben
+            #with colv1:
+                #st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">2018</p>', unsafe_allow_html=True)
+                #st.markdown(var1,unsafe_allow_html=True)
+                #st.markdown(r1,unsafe_allow_html=True)
 
-            with colv3:
-                st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">von 2019</p>', unsafe_allow_html=True)
-                st.markdown(var2,unsafe_allow_html=True)
-                st.markdown(r2,unsafe_allow_html=True)
+            #with colv2:
+                #st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">2019</p>', unsafe_allow_html=True)
+                #st.markdown(var2,unsafe_allow_html=True)
+                #st.markdown(r2,unsafe_allow_html=True)
 
-            with colv2:
-                st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">von 2020</p>', unsafe_allow_html=True)
-                st.markdown(var3,unsafe_allow_html=True)
-                st.markdown(r3,unsafe_allow_html=True)
+            #with colv3:
+                #st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">2020</p>', unsafe_allow_html=True)
+                #st.markdown(var3,unsafe_allow_html=True)
+                #st.markdown(r3,unsafe_allow_html=True)
 
-            with colv1:
-                st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">von 2021</p>', unsafe_allow_html=True)
-                st.markdown(var4,unsafe_allow_html=True)
-                st.markdown(r4,unsafe_allow_html=True)
+            #with colv4:
+                #st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">2021</p>', unsafe_allow_html=True)
+                #st.markdown(var4,unsafe_allow_html=True)
+                #st.markdown(r4,unsafe_allow_html=True)
 
+            #werte sortieren
             var.sort()
             MWN.sort(reverse=True)
 
+            #Spalten definieren
             colvf1,colvf2,colvf3=st.columns((1,50,1))
 
+            #Variantenentwicklung
             optionv = {
                 "tooltip": {
                     "show":False,
@@ -698,7 +723,7 @@ if selected_hor == "Overview":
                 },
                 "series":[
                     {
-                        "data":[0,var[1]-d3,var[2]-d2,var[3]-d1],
+                        "data":[0,d1,d1+d2,d1+d2+d3],
                         "xAxisIndex": 0,
                         "yAxisIndex": 0,
                         "type": 'bar',
@@ -716,7 +741,7 @@ if selected_hor == "Overview":
                         }
                     },
                     {
-                        "data":[d0, d3, d2, d1],
+                        "data":[d1,d2,d3,d0],
                         "xAxisIndex": 0,
                         "yAxisIndex": 0,
                         "type": 'bar',
@@ -726,14 +751,17 @@ if selected_hor == "Overview":
                 ]
             }
 
-            st_echarts(optionv, height=300, width="100%")
+            #st_echarts(optionv, height=300, width="100%")
 
+            #Bereichüberschrift
             st.write(" ")
             st.markdown('<p style="text-align: center;color: #0082B4;font-size:50px">Portfolio</p>', unsafe_allow_html=True)
 
+            #Spalten definieren
             col111,col112,col113,col114 = st.columns((6,5,5,5))
             col11, col12 = st.columns((2,5))
 
+            #Spaltenbeschriftung
             with col112:
                 st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Klasse A</p>', unsafe_allow_html=True)
 
@@ -743,6 +771,7 @@ if selected_hor == "Overview":
             with col114:
                 st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Klasse C</p>', unsafe_allow_html=True)
             
+            #Zeilenbeschriftung
             with col11:
                 st. write("")
                 st. write("")
@@ -762,74 +791,61 @@ if selected_hor == "Overview":
                 st. write("")
                 st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">Low Effizienz</p>', unsafe_allow_html=True)
                 st.markdown('<p style="text-align: center;color: #FFF;font-size:26px">0 - 33%</p>', unsafe_allow_html=True)
-
+            
+            #Werte zuweisen
             dfP={}
-
             for i in files:
                 dfP[f"{i.name}"] = pd.read_excel(i,
                             engine="openpyxl",
                             sheet_name="Portfolio_Auswertung",
                             na_filter=True)
 
-            #st.write(dfP["_2021_ECOSTAR_Analyse.xlsm"])
-
+            #Werte in Bereiche aufteilen
             Header0=[]
             for i in files:
                 Header0.append(i.name.split("_")[1])
 
             Header=[]
-            #Header.append("class")
             for i in files:
                 Header.append(i.name.split("_")[1])
 
             Low_A=[]
-            #Low_A.append("Low-A")
             for i in files:
                 Low_A.append(float("{:.1f}".format(dfP[i.name].at[0,"Anteil"]*100.0)))
 
             Medium_A=[]
-            #Medium_A.append("Medium-A")
             for i in files:
                 Medium_A.append(float("{:.1f}".format(dfP[i.name].at[1,"Anteil"]*100.0)))
             
             Top_A=[]
-            #Top_A.append("Top-A")
             for i in files:
                 Top_A.append(float("{:.1f}".format(dfP[i.name].at[2,"Anteil"]*100.0)))
             
             Low_B=[]
-            #Low_B.append("Low-B")
             for i in files:
                 Low_B.append(float("{:.1f}".format(dfP[i.name].at[3,"Anteil"]*100.0)))
             
             Medium_B=[]
-            #Medium_B.append("Medium-B")
             for i in files:
                 Medium_B.append(float("{:.1f}".format(dfP[i.name].at[4,"Anteil"]*100.0)))
             
             Top_B=[]
-            #Top_B.append("Top-B")
             for i in files:
                 Top_B.append(float("{:.1f}".format(dfP[i.name].at[5,"Anteil"]*100.0)))
             
             Low_C=[]
-            #Low_C.append("Low-C")
             for i in files:
                 Low_C.append(float("{:.1f}".format(dfP[i.name].at[6,"Anteil"]*100.0)))
             
             Medium_C=[]
-            #Medium_C.append("Medium-C")
             for i in files:
                 Medium_C.append(float("{:.1f}".format(dfP[i.name].at[7,"Anteil"]*100.0)))
 
             Top_C=[]
-            #Top_C.append("Top-C")
             for i in files:
                 Top_C.append(float("{:.1f}".format(dfP[i.name].at[8,"Anteil"]*100.0)))
-
-            # st.write(Low_C)
-            # st.write(Header)
            
+            #Portfolio
             option = {
                 "tooltip": {
                     "show":True,
@@ -1080,24 +1096,31 @@ if selected_hor == "ABC":
         #Datei-Uploader einfügen
         with st.expander("Upload"):
             iFiles = st.file_uploader("", accept_multiple_files=True, type=["xlsm"])
-
+        
+        #Initialisierung
         file=None
 
+        #Dateien nach Benennung sortieren
         iFiles.sort(key=lambda x: x.name.split("_")[2])
 
+        #Produktnamen filtern
         iNames=[]
         for i in iFiles:
             iNames.append(i.name.split("_")[0]+i.name.split("_")[2])
         
+        #Produktnamen in Liste umwandeln
         iNames=list(dict.fromkeys(iNames))
         
+        #Produktauswahl
         iFile=st.selectbox("Analyse-File Auswahl", iNames, key="ABCV")
 
+        #Auswahl zuweisen
         filesT=[]
         for i in iFiles:
             if i.name.split("_")[0]+i.name.split("_")[2]==iFile:
                 filesT.append(i)
         
+        #Jahrauswahl
         option1 = {
             "dataset":{},
             "tooltip":{
@@ -1223,21 +1246,28 @@ if selected_hor == "ABC":
             ]
         }
         
+        #Spalten definieren
         colv1,colv2,colv3 = st.columns((3,2,3))
 
+        #Vergleichmodus
         with colv2:
             vergleich = st.checkbox("Vergleichmodus")
 
+        #Click-Events
         events1 = {"click": "function(params) { return params.seriesName }"}
 
+        #Click-Output
         output1 = st_echarts(option1,height=100,events=events1,key="1")
 
+        #Jahrauswahl zuweisen
         for i in filesT:
             if i.name.split("_")[1]==output1:
                 file=i
-            
+
+        #Jahrauswahl formatieren   
         Jahr1 = f"""<style>p.a {{font:50px voestalpine;color: #0082B4;text-align: center}}</style><p class="a">von {output1}</p>"""
 
+        #Jahrauswahl darstellen
         if output1 != None:
             st.markdown(Jahr1,unsafe_allow_html=True)
 
@@ -1350,6 +1380,7 @@ if selected_hor == "ABC":
             #Spalten definieren
             col11, col12, col13 = st.columns((4,2,4))
 
+            #Werte zuweisen
             testc1=df.at[2,4]
             testc2=df.at[2,5]
             testb1=df.at[1,4]
@@ -1381,7 +1412,9 @@ if selected_hor == "ABC":
             with col13:
                 st.plotly_chart(fig_bar2, use_container_width=True)
             
+            #Vergleichmodus
             if vergleich == True:
+                #Jahrauswahl
                 option2 = {
                     "dataset":{},
                     "tooltip":{
@@ -1506,20 +1539,26 @@ if selected_hor == "ABC":
                         }}},
                     ]
                 }
-        
+
+                #Click-Events
                 events2 = {"click": "function(params) { return params.seriesName }"}
 
+                #Click-Output
                 output2 = st_echarts(option2,height=100,events=events2,key="2")
 
+                #Jahrauswahl zuweisen
                 for i in filesT:
                     if i.name.split("_")[1]==output2:
                         file=i
                 
+                #Jahrauswahl formatieren
                 Jahr2 = f"""<style>p.a {{font:50px voestalpine;color: #0082B4;text-align: center}}</style><p class="a">von {output2}</p>"""
 
+                #Jahrauswahl darstellen
                 if output2 != None:
                     st.markdown(Jahr2,unsafe_allow_html=True)
 
+                #Bei Dateiauswahl
                 if file != None:
                     dfr2 = pd.read_excel(file,
                                     engine="openpyxl",
@@ -1670,9 +1709,11 @@ if selected_hor == "ABC":
                     with col132:
                         st.plotly_chart(fig_bar22, use_container_width=True)
             
+            #Dataframe bei Einzelmodus
             else:
                 gb = GridOptionsBuilder.from_dataframe(dfg)
-        
+
+                #Dataframe-Einstellungen
                 grid_options = {
                     "defaultColDef": {
                         "minWidth": 5,
@@ -1750,23 +1791,30 @@ if selected_hor == "Effizienz":
     with st.expander("Upload"):
         iFiles = st.file_uploader("", accept_multiple_files=True, type=["xlsm"])
 
+    #Dateien nach Benennung sortieren
     iFiles.sort(key=lambda x: x.name.split("_")[2].split("-")[0])
-
+    
+    #Produktnamen filtern
     iNames=[]
     for i in iFiles:
         iNames.append(i.name.split("_")[0]+i.name.split("_")[2])
     
+    #Produktnamen in Liste umwandeln
     iNames=list(dict.fromkeys(iNames))
 
+    #Produktauswahl
     iFile=st.selectbox("Analyse-File Auswahl",iNames, key="EFF-V")
 
+    #Auswahl zuweisen
     files=[]
     for i in iFiles:
         if i.name.split("_")[0]+i.name.split("_")[2]==iFile:
             files.append(i)
 
+    #Initialisierung
     file=None
 
+    #Jahrauswahl
     option1 = {
         "dataset":{},
         "tooltip":{
@@ -1892,10 +1940,20 @@ if selected_hor == "Effizienz":
         ]
     }
     
+    #Click-Events
     events1 = {"click": "function(params) { return params.seriesName }"}
 
+    #Click-Output
     output1 = st_echarts(option1,height=100,events=events1,key="1")
 
+    #Jahrauswahl formatieren
+    Jahr1 = f"""<style>p.b{{font:50px voestalpine !important;color: #0082B4;text-align: center !important}}</style><p class="b">von {output1}</p>"""
+
+    #Jahrauswahl darstellen
+    if output1 != None:
+        st.markdown(Jahr1,unsafe_allow_html=True)
+
+    #Jahrauswahl zuweisen
     for i in files:
         if i.name.split("_")[1]==output1:
             file=i
@@ -1995,6 +2053,7 @@ if selected_hor == "Effizienz":
             color_discrete_sequence =['#0082B4']*len(df)
         )
 
+        #Dashtraces anpassen
         fig_area.update_traces(
             hovertemplate=
                 "<b>%{customdata[0]}</b><br>"+
@@ -2042,10 +2101,10 @@ if selected_hor == "Effizienz":
             """, unsafe_allow_html=True)
 
         #Textformatierung zuweisen
-        unistr = f"""<style>p.a {{font:30px voestalpine;color: #0082B4;text-align: right}}</style><p class="a">{uni}</p>"""
-        exklstr = f"""<style>p.a {{font:30px voestalpine;color: #0082B4;text-align: right}}</style><p class="a">{exkl}</p>"""
-        varstr = f"""<style>p.a {{font:30px voestalpine;color: #0082B4;text-align: right}}</style><p class="a">{var}</p>"""
-        einstr = f"""<style>p.a {{font:30px voestalpine;color: #0082B4;text-align: right}}</style><p class="a">{ein}</p>"""
+        unistr = f"""<style>p.a {{font:30px voestalpine !important;color: #0082B4;text-align: right !important}}</style><p class="a">{uni}</p>"""
+        exklstr = f"""<style>p.a {{font:30px voestalpine !important;color: #0082B4;text-align: right !important}}</style><p class="a">{exkl}</p>"""
+        varstr = f"""<style>p.a {{font:30px voestalpine !important;color: #0082B4;text-align: right !important}}</style><p class="a">{var}</p>"""
+        einstr = f"""<style>p.a {{font:30px voestalpine !important;color: #0082B4;text-align: right !important}}</style><p class="a">{ein}</p>"""
 
         #Werte anzeigen
         with col11:
@@ -2066,6 +2125,7 @@ if selected_hor == "Effizienz":
         
         gb = GridOptionsBuilder.from_dataframe(df)
         
+        #Dataframe-Einstellungen
         grid_options = {
             "defaultColDef": {
                 "minWidth": 5,
@@ -2184,16 +2244,21 @@ if selected_hor == "Portfolio":
     with st.expander("Upload"):
         iFiles = st.file_uploader("", accept_multiple_files=True, type=["xlsm"])
 
+    #Dateien nach Benennung sortieren
     iFiles.sort(key=lambda x: x.name.split("_")[2])
 
+    #Produktnamen filtern
     iNames=[]
     for i in iFiles:
         iNames.append(i.name.split("_")[0]+i.name.split("_")[2])
     
+    #Produktnamen in Liste umwandeln
     iNames=list(dict.fromkeys(iNames))
 
+    #Produktauswahl
     iFile=st.selectbox("Analyse-File Auswahl",iNames,key="PORT-V")
 
+    #Dateien zuweisen
     files=[]
     for i in iFiles:
         if i.name.split("_")[0]+i.name.split("_")[2]==iFile:
@@ -2218,14 +2283,17 @@ if selected_hor == "Portfolio":
         }
         )
 
+    #Dateien sortieren
     files.sort(key=lambda x: x.name.split("_")[1])
 
+    #Bei Produktauswahl
     if files != None:
         
         try:
             #Selectbox einfügen
             file=None
 
+            #jahrauswahl
             option1 = {
                 "dataset":{},
                 "tooltip":{
@@ -2351,33 +2419,43 @@ if selected_hor == "Portfolio":
                 ]
             }
             
+            #Click-Events
             events1 = {"click": "function(params) { return params.seriesName }"}
 
+            #Click-Output
             output1 = st_echarts(option1,height=100,events=events1,key="1")
 
+            #Jahrauswahl zuweisen
             for i in files:
                 if i.name.split("_")[1]==output1:
                     file=i
             
+            #Jahrauswahl formatieren
             Jahr1 = f"""<style>p.a {{font:50px voestalpine;color: #0082B4;text-align: center}}</style><p class="a">von {output1}</p>"""
 
+            #Jahrauswahl darstellen
             if output1 != None:
                 st.markdown(Jahr1,unsafe_allow_html=True)
 
+            #Portfolio-Auswertung einlesen
             df = pd.read_excel(file,
                             engine="openpyxl",
                             sheet_name="Portfolio_Auswertung",
                             na_filter=True)
             
+            #Portfolio-Daten einlesen
             dfp = pd.read_excel(file,
                             engine="openpyxl",
                             sheet_name="Portfolio",
                             na_filter=True)
 
+            #NA-Zeilen entfernen
             dfp.dropna(inplace=True)                
 
+            #Spalte in Typ String umwandeln
             dfp = dfp.astype({'MatNr.':'string'})
             
+            #Nach Materialart filtern
             if selected_side=="Fertigungsteile":
                 dfp=dfp.loc[(dfp['Materialart'] == "FERT") | (dfp['Materialart'] == "60FE")]
 
@@ -2387,9 +2465,11 @@ if selected_hor == "Portfolio":
             if selected_side=="Normteile":
                 dfp=dfp.loc[dfp['Materialart'] == "NORM"]
 
+            #Spalten definieren
             col111,col112,col113,col114 = st.columns((7,6,6,6))
             col11, col12 = st.columns((2,5))
 
+            #Spaltenbeschriftung
             with col112:
                 st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Klasse A</p>', unsafe_allow_html=True)
 
@@ -2399,6 +2479,7 @@ if selected_hor == "Portfolio":
             with col114:
                 st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Klasse C</p>', unsafe_allow_html=True)
             
+            #Zeilenbeschriftung
             with col11:
                 st. write("")
                 st. write("")
@@ -2420,6 +2501,7 @@ if selected_hor == "Portfolio":
                 st. write("")
                 st. write("")
 
+            #Portfolio
             with col12:
                 option = {
                     "dataset":{},
@@ -2706,18 +2788,25 @@ if selected_hor == "Portfolio":
 
                 output = st_echarts(option,height=730,events=events)
 
+            #Bei Reset
             if output == "Reset":
                 output=None
             
+            #Datenmaske
             mask=None
 
+            #Klasse filtern
             frame=dfp.loc[dfp['Klasse'] == output]
-
+            
+            #NA-Zeilen entfernen
             frame.dropna(subset=["Materialart"], inplace=True)
 
+            #Spalten filtern
             f=frame.astype(str).loc[:, ["MatNr.", "Objektkurztext", "Materialart", "Warengruppe"]]
             
             gb = GridOptionsBuilder.from_dataframe(f)
+
+            #Portfolio
             grid_options = {
                 "defaultColDef": {
                     "minWidth": 5,
@@ -2757,51 +2846,46 @@ if selected_hor == "Portfolio":
                 ]
                 }
             
+            #Info-Box
             if output != None:
 
                 if output == "Top-A":
-                    #st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie werden in vielen Varianten eingesetzt, die einen hohen Umsatz generieren.</p>', unsafe_allow_html=True)
                     st.info("Komponenten dieser Kategorie werden in vielen Varianten eingesetzt, die einen hohen Umsatz generieren.")
 
                 if output == "Top-B":
-                    #st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie werden in vielen Varianten eingesetzt, sind jedoch nicht umsatzentscheidend.</p>', unsafe_allow_html=True)
                     st.info("Komponenten dieser Kategorie werden in vielen Varianten eingesetzt, sind jedoch nicht umsatzentscheidend.")
 
                 if output == "Top-C":
-                    #st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie werden in vielen Varianten eingesetzt, bringen jedoch keinen Umsatz.</p>', unsafe_allow_html=True)
                     st.info("Komponenten dieser Kategorie werden in vielen Varianten eingesetzt, bringen jedoch keinen Umsatz.")
                     
                 if output == "Medium-A":
-                    #st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie weisen eine mittlere Effizienz auf, generieren jedoch einen hohen Umsatz.</p>', unsafe_allow_html=True)
                     st.info("Komponenten dieser Kategorie weisen eine mittlere Effizienz auf, generieren jedoch einen hohen Umsatz.")
 
                 if output == "Medium-B":
-                    #st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie weisen eine mittlere Effizienz auf, sind jedoch nicht umsatzentscheidend.</p>', unsafe_allow_html=True)
                     st.info("Komponenten dieser Kategorie weisen eine mittlere Effizienz auf, sind jedoch nicht umsatzentscheidend.")
 
                 if output == "Medium-C":
-                    #st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie weisen eine mittlere Effizienz auf, bringen jedoch keinen Umsatz.</p>', unsafe_allow_html=True)
                     st.info("Komponenten dieser Kategorie weisen eine mittlere Effizienz auf, bringen jedoch keinen Umsatz.")
 
                 if output == "Low-A":
-                    #st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie werden nur in wenigen Varianten verbaut, welche jedoch einen hohen Anteil am Umsatz haben.</p>', unsafe_allow_html=True)
                     st.info("Komponenten dieser Kategorie werden nur in wenigen Varianten verbaut, welche jedoch einen hohen Anteil am Umsatz haben.")
 
                 if output == "Low-B":
-                    #st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie werden nur in wenigen Varianten verbaut und generieren keinen wesentlichen Umsatz.</p>', unsafe_allow_html=True)
                     st.info("Komponenten dieser Kategorie werden nur in wenigen Varianten verbaut und generieren keinen wesentlichen Umsatz.")
                     
                 if output == "Low-C":
-                    #st.markdown('<p style="text-align: center;color: #0082B4;font-size:35px">Komponenten dieser Kategorie werden nur in wenigen Varianten verbaut und generieren keinen Umsatz.</p>', unsafe_allow_html=True)
                     st.info("Komponenten dieser Kategorie werden nur in wenigen Varianten verbaut und generieren keinen Umsatz.")
-
+            
+            #Spalten definieren
             colp1,colp2=st.columns((1,1))
-
+            
+            #Suchfunktionen
             with colp1:
                 sucheM = st.text_input("Materialnummer suchen...",placeholder="z.B. 73100000001A")
             with colp2:
                 sucheO = st.text_input("Objektkurztext suchen...",placeholder="z.B. Angriffslappen")
 
+            #Sucheinstellungen
             if output != None:
                 if sucheM and sucheO != "":
                     mask1 = f["MatNr."].str.contains(sucheM, case=False, na=False)
@@ -2919,29 +3003,37 @@ if selected_hor == "Stückliste":
     with st.expander("Upload"):
         iFiles = st.file_uploader("", accept_multiple_files=True, type=["xlsm"])
 
+    #Dateien nach Benennung sortieren
     iFiles.sort(key=lambda x: x.name.split("_")[2])
 
+    #Produktnamen filtern
     iNames=[]
     for i in iFiles:
         iNames.append(i.name.split("_")[0]+i.name.split("_")[2])
     
+    #Produktnamen in Liste umwandeln
     iNames=list(dict.fromkeys(iNames))
 
+    #Produktauswahl
     iFile=st.selectbox("Analyse-File Auswahl",iNames)
 
+    #Produktauswahl zuweisen
     files=[]
     for i in iFiles:
         if i.name.split("_")[0]+i.name.split("_")[2]==iFile:
             files.append(i)
 
+    #Dateien sortieren
     files.sort(key=lambda x: x.name.split("_")[1])
 
+    #Bei Dateiauswahl
     if files != None:
         
         try:
             #Selectbox einfügen
             file=None
 
+            #Jahrauswahl
             option1 = {
                 "dataset":{},
                 "tooltip":{
@@ -3067,48 +3159,61 @@ if selected_hor == "Stückliste":
                 ]
             }
             
+            #Click-Events
             events1 = {"click": "function(params) { return params.seriesName }"}
 
+            #Click-Output
             output1 = st_echarts(option1,height=100,events=events1,key="1")
 
+            #Click-Output zuweisen
             for i in files:
                 if i.name.split("_")[1]==output1:
                     file=i
             
+            #Jahrauswahl formatieren
             Jahr1 = f"""<style>p.a {{font:50px voestalpine;color: #0082B4;text-align: center}}</style><p class="a">von {output1}</p>"""
 
+            #Jahrauswahl darstellen
             if output1 != None:
                 st.markdown(Jahr1,unsafe_allow_html=True)
-
+            
+            #Eingabe einlesen
             df = pd.read_excel(file,
                             engine="openpyxl",
                             sheet_name="Eingabe",
                             na_filter=True,
                             usecols="A")
-                        
+
+            #Varianten zuweisen            
             var=[]
             var=df["Materialnummer"].values.tolist()
             var.sort()
-
+            
+            #Variantenauswahl
             varA=st.selectbox("Varianten Auswahl", var)
 
+            #Variantenauswahl einlesen
             dfA = pd.read_excel(file,
                             engine="openpyxl",
                             sheet_name=varA + ".xlsx",
                             na_filter=True)
-           
+
+            #Komponenten einlesen
             dfK = pd.read_excel(file,
                             engine="openpyxl",
                             sheet_name="Komponenten",
                             na_filter=True)
 
+            #Komponentennummern in Liste umwandeln
             K=[]
             K=dfA["Komponentennummer"].values.tolist()
-
+            
+            #Initialisierung
             eff=[]
             effT=[]
             c=0
 
+            #Komponenten suchen
             for j in K:
                 c=c+1
                 for i in range(len(dfK.Komponentennummer)):
@@ -3117,20 +3222,27 @@ if selected_hor == "Stückliste":
                 if len(eff)<c:
                         eff.append(0.0)
 
+            #Effizienzspalte zuweisen
             dfE=pd.DataFrame(eff,columns=["Effizienz"])
 
+            #Spalte an Dataframe anhängen
             dfG=pd.concat([dfA,dfE], axis=1)
 
+            #Dataframe filtern
             dfG=dfG.query("Warengruppe !='P24401'")
 
+            #Dataframe sorieren
             dfG = dfG.sort_values('Effizienz', ascending=True)
 
+            #NA-Zeilen entfernen
             dfG.dropna(subset=["Objektkurztext"], inplace=True)
 
+            #In Prozentwerte umwandeln
             dfG['Effizienz'] = dfG['Effizienz'].map('{:,.1f}%'.format)
 
             gb = GridOptionsBuilder.from_dataframe(dfG)
-        
+
+            #Dataframe-Einstellungen
             grid_options = {
                 "defaultColDef": {
                     "minWidth": 5,
@@ -3181,13 +3293,17 @@ if selected_hor == "Stückliste":
             #Dataframe anzeigen
             AgGrid(dfG,gridOptions=grid_options, theme="streamlit", height= 400,fit_columns_on_grid_load=True, editable=False)
 
+            #Geladene Daten einlesen
             buffer = io.BytesIO()
 
+            #Dataframe in Excel umwandeln
             with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
                 dfG.to_excel(writer)
 
+            #Spalten definieren
             col1db,col2db,col3db=st.columns((1,1,1))
             with col2db:
+                #Download-Button einfügen
                 st.download_button(
                     label="Download Auswertung",
                     data=buffer,
