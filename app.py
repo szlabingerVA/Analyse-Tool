@@ -2883,8 +2883,10 @@ if selected_hor == "Portfolio":
             #Suchfunktionen
             #with colp1:
                 #sucheM = st.text_input("Materialnummer suchen...",placeholder="z.B. 73100000001A")
+            sucheM=""
             #with colp2:
                 #sucheO = st.text_input("Objektkurztext suchen...",placeholder="z.B. Angriffslappen")
+            sucheO=""
 
             #Sucheinstellungen
             if output != None:
