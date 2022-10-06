@@ -658,31 +658,31 @@ if selected_hor == "Overview":
             r4 = f"""<style>p.b {{font:30px voestalpine;color: #0082B4;text-align: center}}</style><p class="b">+{d0}</p>"""
 
             #Bereichüberschrift
-            st.markdown('<p style="text-align: center;color: #0082B4;font-size:50px">Variantenentwicklung</p>', unsafe_allow_html=True)
+            #st.markdown('<p style="text-align: center;color: #0082B4;font-size:50px">Variantenentwicklung</p>', unsafe_allow_html=True)
 
             #Spalten definieren
             colvo,colv1,colv2,colv3,colv4,colv5 = st.columns((1,2,2,2,2,1))
 
             #Werte ausgeben
-            with colv1:
-                st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">2018</p>', unsafe_allow_html=True)
-                st.markdown(var1,unsafe_allow_html=True)
-                st.markdown(r1,unsafe_allow_html=True)
+            #with colv1:
+                #st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">2018</p>', unsafe_allow_html=True)
+                #st.markdown(var1,unsafe_allow_html=True)
+                #st.markdown(r1,unsafe_allow_html=True)
 
-            with colv2:
-                st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">2019</p>', unsafe_allow_html=True)
-                st.markdown(var2,unsafe_allow_html=True)
-                st.markdown(r2,unsafe_allow_html=True)
+            #with colv2:
+                #st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">2019</p>', unsafe_allow_html=True)
+                #st.markdown(var2,unsafe_allow_html=True)
+                #st.markdown(r2,unsafe_allow_html=True)
 
-            with colv3:
-                st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">2020</p>', unsafe_allow_html=True)
-                st.markdown(var3,unsafe_allow_html=True)
-                st.markdown(r3,unsafe_allow_html=True)
+            #with colv3:
+                #st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">2020</p>', unsafe_allow_html=True)
+                #st.markdown(var3,unsafe_allow_html=True)
+                #st.markdown(r3,unsafe_allow_html=True)
 
-            with colv4:
-                st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">2021</p>', unsafe_allow_html=True)
-                st.markdown(var4,unsafe_allow_html=True)
-                st.markdown(r4,unsafe_allow_html=True)
+            #with colv4:
+                #st.markdown('<p style="text-align: center;color: #0082B4;font-size:30px">2021</p>', unsafe_allow_html=True)
+                #st.markdown(var4,unsafe_allow_html=True)
+                #st.markdown(r4,unsafe_allow_html=True)
 
             #werte sortieren
             var.sort()
@@ -752,7 +752,7 @@ if selected_hor == "Overview":
                 ]
             }
 
-            st_echarts(optionv, height=300, width="100%")
+            #st_echarts(optionv, height=300, width="100%")
 
             #Bereichüberschrift
             st.write(" ")
